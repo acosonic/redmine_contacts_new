@@ -80,7 +80,26 @@ module ContactsQueriesHelper
     end
   end
 
-  # Retrieve query from session or build a new query
+  def contacts_list_style
+    list_styles = ['list_excerpt']
+    if params[:contacts_list_style].blank?
+      list_style = list_styles.include?(session[:contacts_list_style]) ? session[:contacts_list_style] : RedmineContacts.default_list_style
+    else
+      list_style = list_styles.include?(params[:contacts_list_style]) ? params[:contacts_list_style] : RedmineContacts.default_list_style
+    end
+    session[:contacts_list_style] = list_style
+  end
+
+  def deals_list_style
+    list_styles = ['list_excerpt', 'list', 'list_board']
+    if params[:deals_list_style].blank?
+      list_style = list_styles.include?(session[:deals_list_style]) ? session[:deals_list_style] : RedmineContacts.default_list_style.gsub("list_cards", "list_board")
+    else
+      list_style = list_styles.include?(params[:deals_list_style]) ? params[:deals_list_style] : RedmineContacts.default_list_style.gsub("list_cards", "list_board")
+    end
+    session[:deals_list_style] = list_style
+  end
+
   def retrieve_contacts_query
     if !params[:query_id].blank?
       cond = "project_id IS NULL"

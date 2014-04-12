@@ -17,9 +17,9 @@
 # You should have received a copy of the GNU General Public License
 # along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
 
-CONTACTS_VERSION_NUMBER = '3.2.7'
+CONTACTS_VERSION_NUMBER = '3.2.8'
 CONTACTS_VERSION_STATUS = ''
-  
+
 ActiveRecord::Base.observers += [:contact_observer, :note_observer]
 ActiveRecord::Base.observers += [:deal_observer]
 
@@ -33,14 +33,14 @@ Redmine::Plugin.register :redmine_contacts do
   author_url 'mailto:support@redminecrm.com'
 
   requires_redmine :version_or_higher => '2.1.2'
-  
+
   settings :default => {
-    :use_gravatars => false, 
+    :use_gravatars => false,
     :name_format => :lastname_firstname.to_s,
     :auto_thumbnails  => true,
     :contact_list_default_columns => ["first_name", "last_name"],
     :max_thumbnail_file_size => 300
-  }, :partial => 'settings/contacts'
+  }, :partial => 'settings/contacts/contacts'
 
   project_module :contacts do
     permission :view_contacts, {
@@ -100,24 +100,26 @@ Redmine::Plugin.register :redmine_contacts do
   end
 
   menu :project_menu, :contacts, {:controller => 'contacts', :action => 'index'}, :caption => :contacts_title, :param => :project_id
-  menu :application_menu, :contacts,
-                          {:controller => 'contacts', :action => 'index'},
-                          :caption => :label_contact_plural,
-                          :param => :project_id,
-                          :if => Proc.new{User.current.allowed_to?({:controller => 'contacts', :action => 'index'}, 
-                                          nil, {:global => true}) && RedmineContacts.settings[:show_in_app_menu]}
 
   menu :project_menu, :deals, {:controller => 'deals', :action => 'index' }, 
                               :caption => :label_deal_plural, 
                               :if => Proc.new{|p| ContactsSetting[:contacts_show_deals_tab, p.id].to_i > 0 },
                               :param => :project_id
 
+  menu :application_menu, :contacts,
+                          {:controller => 'contacts', :action => 'index'},
+                          :caption => :label_contact_plural,
+                          :param => :project_id,
+                          :if => Proc.new{User.current.allowed_to?({:controller => 'contacts', :action => 'index'}, 
+                                          nil, {:global => true}) && ContactsSetting.contacts_show_in_app_menu? }
+
   menu :application_menu, :deals, 
                           {:controller => 'deals', :action => 'index'}, 
                           :caption => :label_deal_plural, 
                           :param => :project_id, 
                           :if => Proc.new{User.current.allowed_to?({:controller => 'deals', :action => 'index'}, 
-                                          nil, {:global => true}) && RedmineContacts.settings[:show_in_app_menu]}
+                                          nil, {:global => true}) && ContactsSetting.contacts_show_in_app_menu? }
+
 
   menu :admin_menu, :contacts, {:controller => 'settings', :action => 'plugin', :id => "redmine_contacts"}, :caption => :contacts_title
 

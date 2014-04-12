@@ -17,6 +17,7 @@ class DealsController < ApplicationController
  
   helper :attachments
   helper :contacts
+  helper :contacts_queries
   helper :notes   
   helper :timelog
   helper :watchers  
@@ -87,7 +88,7 @@ class DealsController < ApplicationController
     params[:status_id] = "o" unless params.has_key?(:status_id)
     find_deals
     respond_to do |format|
-      format.html { request.xhr? ? render(:partial => (RedmineContacts.list_partial == 'list_cards' ? 'list_excerpt' : RedmineContacts.list_partial), :layout => false, :locals => {:deals => @deals}) : last_notes }
+      format.html { request.xhr? ? render(:partial => (contacts_list_style == 'list_cards' ? 'list_excerpt' : contacts_list_style), :layout => false, :locals => {:deals => @deals}) : last_notes }
       format.csv { send_data(deals_to_csv(find_deals(false)), :type => 'text/csv; header=present', :filename => 'deals.csv') }
       format.api
     end

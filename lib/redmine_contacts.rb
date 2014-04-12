@@ -34,8 +34,9 @@ ActionDispatch::Reloader.to_prepare do
 	require_dependency 'redmine_contacts/patches/my_controller_patch'
 	require_dependency 'redmine_contacts/patches/projects_controller_patch'
 	require_dependency 'redmine_contacts/patches/issues_controller_patch'
-	require_dependency 'redmine_contacts/patches/projects_helper_patch'
-	require_dependency 'redmine_contacts/patches/settings_controller_patch'
+  require_dependency 'redmine_contacts/patches/projects_helper_patch'
+  require_dependency 'redmine_contacts/patches/settings_controller_patch'
+	# require_dependency 'redmine_contacts/patches/settings_helper_patch'
 end
 
 require_dependency 'redmine_contacts/wiki_macros/contacts_wiki_macros'
@@ -52,10 +53,17 @@ require 'acts_as_taggable_on_patch'
 
 module RedmineContacts
 
+  def self.companies_select
+  	RedmineContacts.settings[:select_companies_to_deal]
+  end
 
-  def self.settings() Setting[:plugin_redmine_contacts] end
+  def self.cross_project_contacts?
+  	!!RedmineContacts.settings[:cross_project_contacts]
+  end
 
-  def self.list_partial
+  def self.settings() Setting[:plugin_redmine_contacts].blank? ? {} : Setting[:plugin_redmine_contacts]  end
+
+  def self.default_list_style
     return 'list_excerpt'
   end
 

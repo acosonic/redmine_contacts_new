@@ -193,20 +193,19 @@ da:
 
   #2.3.0
   label_crm_module_plural: Moduler
-  label_crm_contacts_default_currency: Standardvaluta for tilbud
-  label_crm_contacts_list_partial_style: Kontaktliste udseende
-  label_crm_contacts_list_excerpt: Uddragsliste
-  label_crm_contacts_list_cards: Kort
-  label_crm_contacts_list_list: Tabel
+  label_crm_list_partial_style: Kontaktliste udseende
+  label_crm_list_excerpt: Uddragsliste
+  label_crm_list_cards: Kort
+  label_crm_list_list: Tabel
   field_contacts: Kontakt
   field_companies: Virksomhed
-  label_crm_contacts_added_time_by: Tilføjet af
+  label_crm_added_by: Tilføjet af
   label_crm_contact_note_authoring_time: Vis notetidspunkt
   label_crm_contact_issues_filters: Sager filtreret
-  label_crm_contacts_csv_import: Importer kontakter fra CSV
-  label_crm_contacts_upload_encoding: Filkodning
-  label_crm_contacts_csv_file: CSV fil
-  label_crm_contacts_csv_separator: Adskiller
+  label_crm_csv_import: Importer kontakter fra CSV
+  label_crm_upload_encoding: Filkodning
+  label_crm_csv_file: CSV fil
+  label_crm_csv_separator: Adskiller
   field_middle_name: Mellemnavn
   field_job_title: Stilling
   field_company: Virksomhed

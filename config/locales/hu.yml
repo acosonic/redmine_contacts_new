@@ -197,20 +197,19 @@ hu:
 
   #2.3.0
   label_crm_module_plural: Modulok
-  label_crm_contacts_default_currency: Alku alapértelmezett pénzneme
-  label_crm_contacts_list_partial_style: Kapcsolatok megjelenítési módja
-  label_crm_contacts_list_excerpt: Kivonatolt lista
-  label_crm_contacts_list_cards: Névjegyek
-  label_crm_contacts_list_list: Táblázat
+  label_crm_list_partial_style: Kapcsolatok megjelenítési módja
+  label_crm_list_excerpt: Kivonatolt lista
+  label_crm_list_cards: Névjegyek
+  label_crm_list_list: Táblázat
   field_contacts: Kapcsolat
   field_companies: Cég
-  label_crm_contacts_added_time_by: Hozzáadta
+  label_crm_added_by: Hozzáadta
   label_crm_contact_note_authoring_time: Megjegyzés idejének megtekintése
   label_crm_contact_issues_filters: Feladat szűrők
-  label_crm_contacts_csv_import: Importálás CSV fájlból
-  label_crm_contacts_upload_encoding: Fájl kódolás
-  label_crm_contacts_csv_file: CSV fájl
-  label_crm_contacts_csv_separator: Elválasztó
+  label_crm_csv_import: Importálás CSV fájlból
+  label_crm_upload_encoding: Fájl kódolás
+  label_crm_csv_file: CSV fájl
+  label_crm_csv_separator: Elválasztó
   field_middle_name: Középső név
   field_job_title: Beosztás
   field_company: Cég

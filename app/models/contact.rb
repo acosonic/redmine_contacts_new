@@ -75,7 +75,7 @@ class Contact < ActiveRecord::Base
                      # sort by id so that limited eager loading doesn't break with postgresql
                      :order_column => "#{table_name}.id"
 
-  accepts_nested_attributes_for :address, :allow_destroy => true, :reject_if => proc {|attributes| Address.reject_address(attributes)}
+  accepts_nested_attributes_for :address, :allow_destroy => true, :update_only => true, :reject_if => proc {|attributes| Address.reject_address(attributes)}
 
   scope :visible, lambda {|*args| includes(:projects).where(Contact.visible_condition(args.shift || User.current, *args)) }
   scope :deletable, lambda {|*args| includes(:projects).where(Contact.deletable_condition(args.shift || User.current, *args)) }

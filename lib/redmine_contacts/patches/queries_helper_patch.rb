@@ -27,27 +27,21 @@ module RedmineContacts
 
         base.class_eval do
           unloadable
-
-          alias_method_chain :column_content, :contacts
+          alias_method_chain :column_value, :contacts
         end
       end
 
 
       module InstanceMethods
-        # include ContactsHelper
-
-        def column_content_with_contacts(column, issue)
-          if column.name.eql? :contacts
-      			column.value(issue).collect{ |contact| content_tag(
-      				:span,
-      				link_to(avatar_to(contact, :size => "16"),
-      						contact_path(contact), :id => "avatar") + ' ' +
-      						link_to_source(contact),
-      				:class => "contact") }.join(', ')
+        def column_value_with_contacts(column, issue, value)
+          case value.class.name
+          when 'Contact'
+            contact_tag(value)
           else
-            column_content_without_contacts(column, issue)
+            column_value_without_contacts(column, issue, value)
           end
         end
+
       end
 
     end

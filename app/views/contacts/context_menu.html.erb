@@ -12,7 +12,7 @@
                                 :class => 'icon-add-deal', :disabled => !@can[:create_deal] %></li>
             <% if @contact.is_company? %>
             <li><%= context_menu_link l(:label_crm_add_contact), {:controller => 'contacts', :action => 'new', :project_id => @project, :contact => {:company => @contact.name}},
-                                :class => 'icon-add-company-contact', :disabled => !@can[:create] %></li>
+                                :class => 'icon-company-contact', :disabled => !@can[:create] %></li>
             <% end %>
         <% end %>
     <% else %>

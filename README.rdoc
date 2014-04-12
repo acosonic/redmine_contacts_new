@@ -3,19 +3,19 @@
 == Install
 
 * Copy redmine_contacts plugin to {RAILS_APP}/plugins on your redmine path
-* Run bundle install --without development test RAILS_ENV=production 
-* Run rake redmine:plugins NAME=redmine_contacts RAILS_ENV=production   
+* Run bundle install --without development test RAILS_ENV=production
+* Run rake redmine:plugins NAME=redmine_contacts RAILS_ENV=production
 
 == Uninstall
 
 <pre>
-rake redmine:plugins NAME=redmine_contacts VERSION=0 RAILS_ENV=production 
+rake redmine:plugins NAME=redmine_contacts VERSION=0 RAILS_ENV=production
 rm -r plugins/redmine_contacts
 </pre>
 
 == Requirements
- 
-* Redmine 2.1.2
+
+* Redmine 2.1.2+
 
 == Test
 rake db:drop  RAILS_ENV=test_sqlite3

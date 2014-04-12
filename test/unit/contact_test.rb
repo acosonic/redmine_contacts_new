@@ -1,4 +1,25 @@
-require File.expand_path('../../test_helper', __FILE__)  
+# encoding: utf-8
+#
+# This file is a part of Redmine CRM (redmine_contacts) plugin,
+# customer relationship management plugin for Redmine
+#
+# Copyright (C) 2011-2013 Kirill Bezrukov
+# http://www.redminecrm.com/
+#
+# redmine_contacts is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# redmine_contacts is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
+
+require File.expand_path('../../test_helper', __FILE__)
 
 class ContactTest < ActiveSupport::TestCase
   fixtures :projects,
@@ -25,7 +46,7 @@ class ContactTest < ActiveSupport::TestCase
            :journal_details,
            :queries
 
-    ActiveRecord::Fixtures.create_fixtures(File.dirname(__FILE__) + '/../fixtures/', 
+    ActiveRecord::Fixtures.create_fixtures(File.dirname(__FILE__) + '/../fixtures/',
                             [:contacts,
                              :contacts_projects,
                              :contacts_issues,
@@ -35,7 +56,7 @@ class ContactTest < ActiveSupport::TestCase
                              :enabled_modules,
                              :tags,
                              :taggings,
-                             :contacts_queries])   
+                             :contacts_queries])
 
 
   # Replace this with your real tests.
@@ -107,14 +128,14 @@ class ContactTest < ActiveSupport::TestCase
     contact.visibility = Contact::VISIBILITY_PROJECT
     contact.save!
     contacts = project.contacts.visible(user).all
-    assert contacts.blank?, "Contacts visible for user without view_contacts permissions"    
+    assert contacts.blank?, "Contacts visible for user without view_contacts permissions"
 
     role.add_permission!(:view_private_contacts)
     user.reload
     contact.visibility = Contact::VISIBILITY_PRIVATE
     contact.save!
     contacts = Contact.visible(user).all
-    assert contacts.any?, "Contacts note visible for user with view_private_contacts permissions"       
+    assert contacts.any?, "Contacts note visible for user with view_private_contacts permissions"
   end
 
   def test_visible

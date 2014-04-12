@@ -17,32 +17,38 @@
 # You should have received a copy of the GNU General Public License
 # along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
 
-class CreateTags < ActiveRecord::Migration
-  def self.up
-    unless ActsAsTaggableOn::Tag.table_exists?
-      create_table :tags do |t|
-        t.column :name, :string
-      end
-      add_index :tags, :name
-    end
+module RedmineContacts
+  module Patches
+    module SettingsHelperPatch
+      def self.included(base)
+        base.send(:include, InstanceMethods)
 
-    unless ActsAsTaggableOn::Tagging.table_exists?
-      create_table :taggings do |t|
-        t.references :tag
-        t.references :taggable, :polymorphic => true
-        t.references :tagger, :polymorphic => true
-        t.string :context, :limit => 128
-        t.datetime :created_at
+        base.class_eval do
+          unloadable
+
+          alias_method_chain :administration_settings_tabs, :contacts
+        end
       end
 
-      add_index :taggings, :tag_id
-      add_index :taggings, [:taggable_id, :taggable_type, :context]
+
+      module InstanceMethods
+        # include ContactsHelper
+
+        def administration_settings_tabs_with_contacts
+          tabs = administration_settings_tabs_without_contacts
+
+          tabs.push({ :name => 'money',
+            :partial => 'settings/contacts/money',
+            :label => :label_crm_money_settings })
+
+        end
+
+      end
+
     end
-
   end
+end
 
-  def self.down
-    drop_table :taggings
-    drop_table :tags
-  end
+unless SettingsHelper.included_modules.include?(RedmineContacts::Patches::SettingsHelperPatch)
+  SettingsHelper.send(:include, RedmineContacts::Patches::SettingsHelperPatch)
 end

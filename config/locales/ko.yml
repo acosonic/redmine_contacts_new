@@ -197,20 +197,19 @@ ko:
 
   #2.3.0
   label_crm_module_plural: 모듈
-  label_crm_contacts_default_currency: 디폴트 입찰 통화
-  label_crm_contacts_list_partial_style: 연락처 표시 방식
-  label_crm_contacts_list_excerpt: 인용 리스트
-  label_crm_contacts_list_cards: Cards
-  label_crm_contacts_list_list: Table
+  label_crm_list_partial_style: 연락처 표시 방식
+  label_crm_list_excerpt: 인용 리스트
+  label_crm_list_cards: Cards
+  label_crm_list_list: Table
   field_contacts: 연락처
   field_companies: 회사
-  label_crm_contacts_added_time_by: 작성자 -
+  label_crm_added_by: 작성자 -
   label_crm_contact_note_authoring_time: 메모 시간보기
   label_crm_contact_issues_filters: Issues filters
-  label_crm_contacts_csv_import: Import from CSV
-  label_crm_contacts_upload_encoding: 파일 인코딩
-  label_crm_contacts_csv_file: CSV file
-  label_crm_contacts_csv_separator: Separator
+  label_crm_csv_import: Import from CSV
+  label_crm_upload_encoding: 파일 인코딩
+  label_crm_csv_file: CSV file
+  label_crm_csv_separator: Separator
   field_middle_name: Middle Name
   field_job_title: 직업
   field_company: 회사

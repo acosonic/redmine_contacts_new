@@ -45,7 +45,7 @@ module NotesHelper
 
   def authoring_note(created, author, options={})
     if RedmineContacts.settings[:note_authoring_time]
-      ('<span class="author">' + l(options[:label] || :label_crm_contacts_added_time_by) + ' ' +
+      ('<span class="author">' + l(options[:label] || :label_crm_added_by) + ' ' +
             link_to_user(author) + ', ' +
             format_time(created) + '<span>').html_safe
     else

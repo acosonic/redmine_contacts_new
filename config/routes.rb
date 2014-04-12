@@ -40,7 +40,8 @@
   resources :deals do
     collection do
       get :bulk_edit, :context_menu, :edit_mails, :preview_email
-      post :bulk_edit, :bulk_update, :send_mails
+      post :bulk_edit, :bulk_update, :send_mails, :update_form
+      put :update_form
       delete :bulk_destroy
     end
   end
@@ -92,6 +93,7 @@
   # match 'notes/add_note' => 'notes#add_note'
   # match 'notes/destroy' => 'notes#destroy'
 
+  match 'auto_completes/taggable_tags' => 'auto_completes#taggable_tags', :via => :get, :as => 'auto_complete_taggable_tags'
   match 'auto_completes/contact_tags' => 'auto_completes#contact_tags', :via => :get, :as => 'auto_complete_contact_tags'
   match 'auto_completes/contacts' => 'auto_completes#contacts', :via => :get, :as => 'auto_complete_contacts'
   match 'auto_completes/companies' => 'auto_completes#companies', :via => :get, :as => 'auto_complete_companies'
@@ -110,5 +112,3 @@
   match 'contacts_mailer/:action' => 'contacts_mailer'
   match 'deals_tasks/:action' => 'deals_tasks'
   match 'attachments/contacts_thumbnail/:id(/:size)', :controller => 'attachments', :action => 'contacts_thumbnail', :id => /\d+/, :via => :get
-
-    

@@ -188,20 +188,19 @@ de:
 
   #2.3.0
   label_crm_module_plural: Module
-  label_crm_contacts_default_currency: Standard Währung für Verfaufschange
-  label_crm_contacts_list_partial_style: Kontaktlisten-Ansicht
-  label_crm_contacts_list_excerpt: Einspalte Liste
-  label_crm_contacts_list_cards: Karten
-  label_crm_contacts_list_list: Tabelle
+  label_crm_list_partial_style: Liste
+  label_crm_list_excerpt: Einspalte Liste
+  label_crm_list_cards: Karten
+  label_crm_list_list: Tabelle
   field_contacts: Kontakt
   field_companies: Unternehmen
-  label_crm_contacts_added_time_by: Hinzugefügt von
+  label_crm_added_by: Hinzugefügt von
   label_crm_contact_note_authoring_time: Zeige Anmerkung mit Uhrzeit
   label_crm_contact_issues_filters: Ticketfilter
-  label_crm_contacts_csv_import: Kontakte von CSV importieren
-  label_crm_contacts_upload_encoding: Datei Encoding
-  label_crm_contacts_csv_file: CSV Datei
-  label_crm_contacts_csv_separator: Separator
+  label_crm_csv_import: Kontakte von CSV importieren
+  label_crm_upload_encoding: Datei Encoding
+  label_crm_csv_file: CSV Datei
+  label_crm_csv_separator: Separator
   field_middle_name: Zwischenname
   field_job_title: Berufsbezeichnung
   field_company: Unternehmen
@@ -441,7 +440,7 @@ de:
     NG: Nigeria
     NU: Niue
     NF: Norfolkinsel
-    NO: Norwegen
+    "NO": Norwegen
     MP: Nördliche Marianen
     OM: Oman
     TL: Osttimor

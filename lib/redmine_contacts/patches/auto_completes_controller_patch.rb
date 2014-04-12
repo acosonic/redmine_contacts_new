@@ -34,14 +34,14 @@ module RedmineContacts
         def contact_tags
           @name = params[:q].to_s
           @tags = Contact.available_tags :name_like => @name, :limit => 10
-          render :layout => false, :partial => 'tag_list'
+          render :layout => false, :partial => 'crm_tag_list'
         end
 
-        def tags
+        def taggable_tags
           klass = Object.const_get(params[:taggable_type].camelcase)
           @name = params[:q].to_s
           @tags = klass.all_tag_counts(:conditions => ["#{ActsAsTaggableOn::Tag.table_name}.name LIKE ?", "%#{@name}%"], :limit => 10)
-          render :layout => false, :partial => 'tag_list'
+          render :layout => false, :partial => 'crm_tag_list'
         end
 
         def contacts

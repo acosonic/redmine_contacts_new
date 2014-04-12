@@ -84,7 +84,7 @@ class ContactsController < ApplicationController
             last_notes
             @tags = Contact.available_tags(:project => @project)
           else
-            render :partial => RedmineContacts.list_partial, :layout => false
+            render :partial => contacts_list_style, :layout => false
           end
         end
         format.api

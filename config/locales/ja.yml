@@ -192,20 +192,19 @@ ja:
 
   #2.3.0
   label_crm_module_plural: モジュール
-  label_crm_contacts_default_currency: デフォルト取引通過
-  label_crm_contacts_list_partial_style: コンタクトリストのスタイル
-  label_crm_contacts_list_excerpt: Excerpert リスト
-  label_crm_contacts_list_cards: カード
-  label_crm_contacts_list_list: テーブル
+  label_crm_list_partial_style: コンタクトリストのスタイル
+  label_crm_list_excerpt: Excerpert リスト
+  label_crm_list_cards: カード
+  label_crm_list_list: テーブル
   field_contacts: コンタクト
   field_companies: 会社
-  label_crm_contacts_added_time_by: 作成日
+  label_crm_added_by: 作成日
   label_crm_contact_note_authoring_time: ノート時間の表示
   label_crm_contact_issues_filters: チケットフィルター
-  label_crm_contacts_csv_import: CSV からコンタクトをインポート
-  label_crm_contacts_upload_encoding: File エンコード
-  label_crm_contacts_csv_file: CSV ファイル
-  label_crm_contacts_csv_separator: セパレータ
+  label_crm_csv_import: CSV からコンタクトをインポート
+  label_crm_upload_encoding: File エンコード
+  label_crm_csv_file: CSV ファイル
+  label_crm_csv_separator: セパレータ
   field_middle_name: ミドルネーム
   field_job_title: 役職
   field_company: 会社

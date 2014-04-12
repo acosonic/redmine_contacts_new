@@ -1,3 +1,24 @@
+# encoding: utf-8
+#
+# This file is a part of Redmine CRM (redmine_contacts) plugin,
+# customer relationship management plugin for Redmine
+#
+# Copyright (C) 2011-2013 Kirill Bezrukov
+# http://www.redminecrm.com/
+#
+# redmine_contacts is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# redmine_contacts is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
+
 require File.expand_path('../../test_helper', __FILE__)
 
 class ContactsQueryTest < ActiveSupport::TestCase
@@ -25,7 +46,7 @@ class ContactsQueryTest < ActiveSupport::TestCase
            :journal_details,
            :queries
 
-    ActiveRecord::Fixtures.create_fixtures(File.dirname(__FILE__) + '/../fixtures/', 
+    ActiveRecord::Fixtures.create_fixtures(File.dirname(__FILE__) + '/../fixtures/',
                             [:contacts,
                              :contacts_projects,
                              :contacts_issues,
@@ -35,7 +56,7 @@ class ContactsQueryTest < ActiveSupport::TestCase
                              :enabled_modules,
                              :tags,
                              :taggings,
-                             :contacts_queries])   
+                             :contacts_queries])
 
 
   def test_project_filter_in_global_queries
@@ -61,7 +82,7 @@ class ContactsQueryTest < ActiveSupport::TestCase
   def assert_query_statement_includes(query, condition)
     assert query.statement.include?(condition), "Query statement condition not found in: #{query.statement}"
   end
-  
+
   def assert_query_result(expected, query)
     assert_nothing_raised do
       assert_equal expected.map(&:id).sort, query.issues.map(&:id).sort
@@ -71,4 +92,3 @@ class ContactsQueryTest < ActiveSupport::TestCase
 
 
 end
-

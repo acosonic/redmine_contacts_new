@@ -81,7 +81,7 @@
 
 		</div>
 	</fieldset> 
-  <% if RedmineContacts.list_partial != 'list' %>
+  <% if contacts_list_style != 'list' %>
     <fieldset class="collapsible collapsed">
       <legend onclick="toggleFieldset(this);"><%= l(:label_options) %></legend>
       <div style="display: none;">
@@ -120,7 +120,7 @@
 <% if @deals.empty? %>
     <p class="nodata"><%= l(:label_no_data) %></p>
 <% else %>
-  	<%= render :partial => RedmineContacts.list_partial == 'list_cards' ? 'list_excerpt' : RedmineContacts.list_partial %>
+  	<%= render :partial => contacts_list_style == 'list_cards' ? 'list_excerpt' : contacts_list_style %>
     <% other_formats_links do |f| %>
         <%= f.link_to 'CSV', :url => params %>    
     <% end %>    

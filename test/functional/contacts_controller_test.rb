@@ -19,6 +19,7 @@
 # You should have received a copy of the GNU General Public License
 # along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
 
+# encoding: utf-8
 require File.expand_path('../../test_helper', __FILE__)
 
 class ContactsControllerTest < ActionController::TestCase

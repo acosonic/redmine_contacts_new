@@ -1,20 +1,36 @@
 <p>
-  <label><%= l(:label_crm_gravatar_enabled) %></label>
-  <%= check_box_tag 'settings[use_gravatar]', 1, @settings[:use_gravatar] %>
-</p>
-
-<p>
   <label><%= l(:label_crm_user_format) %></label>
   <%= select_tag 'settings[name_format]', options_for_select(Contact::CONTACT_FORMATS.keys.collect {|f| [Contact.new(:first_name => 'Firstname', :last_name => 'Lastname', :middle_name => 'Middlename').name(f), f.to_s] }, @settings[:name_format] ) %>
 </p>
 
 <p>
-  <label><%= l(:label_crm_contacts_list_excerpt) %></label>
-  <%= select_tag 'settings[list_partial_style]', options_for_select([[l(:label_crm_contacts_list_excerpt), "list_excerpt"], [l(:label_crm_contacts_list_list), "list"], [l(:label_crm_contacts_list_cards), "list_cards"]] , @settings[:list_partial_style]) %>
+  <label><%= l(:label_crm_show_in_top_menu) %></label>
+  <span id="watchers_inputs">
+    <span class="floating" style="margin-left: 0px;">
+    <%= check_box_tag 'settings[contacts_show_in_top_menu]', 1, @settings[:contacts_show_in_top_menu] %>
+    <%= l(:label_contact_plural) %>
+    </span>
+  </span>
 </p>
 
 <p>
-  <label><%= l(:label_crm_contacts_default_currency) %></label>
+  <label><%= l(:label_crm_show_in_app_menu) %></label>
+  <span id="watchers_inputs">
+    <span class="floating" style="margin-left: 0px;">
+    <%= check_box_tag 'settings[contacts_show_in_app_menu]', 1, @settings[:contacts_show_in_app_menu] %>
+    <%= l(:label_contact_plural) %>
+    </span>
+  </span>
+</p>
+
+
+<p>
+  <label><%= l(:label_crm_list_excerpt) %></label>
+  <%= select_tag 'settings[list_partial_style]', options_for_select([[l(:label_crm_list_excerpt), "list_excerpt"], [l(:label_crm_list_list), "list"], [l(:label_crm_list_cards), "list_cards"]] , @settings[:list_partial_style]) %>
+</p>
+
+<p>
+  <label><%= l(:label_crm_default_currency) %></label>
   <%= select_tag 'settings[default_currency]', options_for_select(all_currencies.insert(0, ['', '-1']), @settings[:default_currency]) %>
 </p>
 

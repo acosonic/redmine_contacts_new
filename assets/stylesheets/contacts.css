@@ -395,6 +395,32 @@ div#deal-status span.contextual {float: none; padding-left: 0px;}
 .deal_list tr.odd.status-type-1 td, .deal_list tr.even.status-type-1 td { border-color: #9FCF9F; }
 
 
+/**********************************************************************/
+/* DEALS BOARD
+/**********************************************************************/
+table.list.deal-board tbody tr,
+table.list.deal-board tbody tr:hover {background-color: white;}
+.deal-board .deal-card {
+	padding: 5px;
+	border: solid 1px #d5d5d5;
+	background-color: white;
+	margin: 5px;
+}
+.deal-board .deal-card {background-color: #ffffdd;}
+.deal-board .deal-status-col {text-align: left; white-space: normal;}
+.deal-board .avatar {float: left; margin-right: 5px;}
+.deal-board p.name {
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+.deal-board .info {
+	border-top: 1px solid #d5d5d5;
+	padding-top: 5px;
+}
+.deal-board td.deal-status-col.won .deal-card {background: #DFFFDF; border-color: #9FCF9F;}
+.deal-board td.deal-status-col.lost .deal-card {background: #FEE; border-color: #FCC;}
+
+
 /**************************************************************/
 /* 		                  ICONS
 /**************************************************************/
@@ -406,7 +432,7 @@ div#deal-status span.contextual {float: none; padding-left: 0px;}
 .icon-merge { background-image:  url(../images/arrow_merge.png); }
 
 .icon-add-deal { background-image: url(../images/money.png); }
-.icon-add-company-contact { background-image: url(../images/user_suit.png); }
+.icon-company-contact { background-image: url(../images/user_suit.png); }
 .icon-link-break { background-image: url(../../../images/link_break.png); }
 .icon-call { background-image: url(../images/phone.png); }
 .icon-meeting { background-image: url(../images/calendar_view_day.png); }

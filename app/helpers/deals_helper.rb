@@ -77,11 +77,11 @@ module DealsHelper
   end
 
   def deal_price(deal)
-    price_to_currency(deal.price, deal.currency, :symbol => true).to_s
+    object_price(deal)
   end
 
   def deal_statuses
-    (!@project.blank? ? @project.deal_statuses : DealStatus.all(:order => "#{DealStatus.table_name}.status_type, #{DealStatus.table_name}.position")) || []
+    (!@project.blank? ? @project.deal_statuses : DealStatus.order("#{DealStatus.table_name}.status_type, #{DealStatus.table_name}.position")) || []
   end
 
   def remove_contractor_link(contact)
@@ -132,11 +132,7 @@ module DealsHelper
     content_tag(:span, status_tag, :class => "tag-label-color", :style => "background-color:#{deal_status.color_name};color:white;")
   end
 
-
   def retrieve_deals_query
-    # debugger
-    # params.merge!(session[:deals_query])
-    # session[:deals_query] = {:project_id => @project.id, :status_id => params[:status_id], :category_id => params[:category_id], :assigned_to_id => params[:assigned_to_id]}
     if params[:status_id] || !params[:period].blank? || !params[:category_id].blank? || !params[:assigned_to_id].blank?
       session[:deals_query] = {:project_id => (@project ? @project.id : nil),
                                :status_id => params[:status_id],

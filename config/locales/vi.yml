@@ -193,20 +193,19 @@ vi:
 
   #2.3.0
   label_crm_module_plural: Modules
-  label_crm_contacts_default_currency: Default deal currency
-  label_crm_contacts_list_partial_style: Contacts list style
-  label_crm_contacts_list_excerpt: Excerpt list
-  label_crm_contacts_list_cards: Cards
-  label_crm_contacts_list_list: Table
+  label_crm_list_partial_style: Contacts list style
+  label_crm_list_excerpt: Excerpt list
+  label_crm_list_cards: Cards
+  label_crm_list_list: Table
   field_contacts: Contact
   field_companies: Company
-  label_crm_contacts_added_time_by: Added by
+  label_crm_added_by: Added by
   label_crm_contact_note_authoring_time: Show note time
   label_crm_contact_issues_filters: Issues filters
-  label_crm_contacts_csv_import: Import contacts from CSV
-  label_crm_contacts_upload_encoding: File encoding
-  label_crm_contacts_csv_file: CSV file
-  label_crm_contacts_csv_separator: Separator
+  label_crm_csv_import: Import contacts from CSV
+  label_crm_upload_encoding: File encoding
+  label_crm_csv_file: CSV file
+  label_crm_csv_separator: Separator
   field_middle_name: Middle Name
   field_job_title: Job title
   field_company: Company

@@ -196,20 +196,19 @@ en:
 
   #2.3.0
   label_crm_module_plural: Modules
-  label_crm_contacts_default_currency: Default deal currency
-  label_crm_contacts_list_partial_style: Contacts list style
-  label_crm_contacts_list_excerpt: Excerpt list
-  label_crm_contacts_list_cards: Cards
-  label_crm_contacts_list_list: Table
+  label_crm_list_partial_style: List style
+  label_crm_list_excerpt: Excerpt list
+  label_crm_list_cards: Cards
+  label_crm_list_list: Table
   field_contacts: Contact
   field_companies: Company
-  label_crm_contacts_added_time_by: Added by
+  label_crm_added_by: Added by
   label_crm_contact_note_authoring_time: Show note time
   label_crm_contact_issues_filters: Issues filters
-  label_crm_contacts_csv_import: Import from CSV
-  label_crm_contacts_upload_encoding: File encoding
-  label_crm_contacts_csv_file: CSV file
-  label_crm_contacts_csv_separator: Separator
+  label_crm_csv_import: Import from CSV
+  label_crm_upload_encoding: File encoding
+  label_crm_csv_file: CSV file
+  label_crm_csv_separator: Separator
   field_middle_name: Middle Name
   field_job_title: Job title
   field_company: Company
@@ -469,7 +468,7 @@ en:
     KP: North Korea
     VD: North Vietnam
     MP: Northern Mariana Islands
-    NO: Norway
+    "NO": Norway
     OM: Oman
     PC: Pacific Islands Trust Territory
     PK: Pakistan
@@ -562,3 +561,16 @@ en:
     ZW: Zimbabwe
     AX: Åland Islands
   label_crm_cross_project_contacts: Allow cross-project contacts relations
+  label_crm_list_board: Board
+  label_crm_default_list_style: Default list style
+  label_crm_show_in_top_menu: Show in top menu
+  label_crm_show_in_app_menu: Show in app menu
+  label_crm_money_settings: Money
+  label_crm_disable_taxes: Disable taxes
+  label_crm_default_tax: Default tax value
+  label_crm_tax_type: Tax type
+  label_crm_tax_type_inclusive: Tax inclusive
+  label_crm_tax_type_exclusive: Tax exclusive
+  label_crm_default_currency: Default currency
+  label_crm_thousands_delimiter: Thousands delimiter
+  label_crm_decimal_separator: Decimal separator

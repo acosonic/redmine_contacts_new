@@ -20,6 +20,9 @@
 class ContactsSetting < ActiveRecord::Base
   unloadable
 
+  TAX_TYPE_EXCLUSIVE = 1
+  TAX_TYPE_INCLUSIVE = 2
+
   belongs_to :project
 
   cattr_accessor :settings
@@ -70,6 +73,48 @@ class ContactsSetting < ActiveRecord::Base
 
   def self.spreadsheet?
     Object.const_defined?(:Spreadsheet)
+  end
+
+  def self.monochrome_tags?
+    !!Setting.plugin_redmine_contacts["monochrome_tags"]
+  end
+
+  def self.contacts_show_in_top_menu?
+    !!Setting.plugin_redmine_contacts["contacts_show_in_top_menu"]
+  end
+
+  def self.contacts_show_in_app_menu?
+    !!Setting.plugin_redmine_contacts["contacts_show_in_app_menu"]
+  end
+
+  # Finance
+
+  def self.default_currency
+    Setting.plugin_redmine_contacts["default_currency"] || 'USD'
+  end
+
+  def self.default_tax
+    Setting.plugin_redmine_contacts["default_tax"].to_f
+  end
+
+  def self.tax_type
+    ((["1", "2"] & [Setting.plugin_redmine_contacts["tax_type"].to_s]).first || TAX_TYPE_EXCLUSIVE).to_i
+  end
+
+  def self.tax_exclusive?
+    ContactsSetting.tax_type == TAX_TYPE_EXCLUSIVE
+  end
+
+  def self.thousands_delimiter
+    ([" ", ",", "."] & [Setting.plugin_redmine_contacts["thousands_delimiter"]]).first || " "
+  end
+
+  def self.decimal_separator
+    ([",", "."] & [Setting.plugin_redmine_contacts["decimal_separator"]]).first || "."
+  end
+
+  def self.disable_taxes?
+    !!Setting.plugin_redmine_contacts["disable_taxes"]
   end
 
   private

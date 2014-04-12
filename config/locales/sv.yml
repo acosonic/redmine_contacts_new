@@ -193,20 +193,19 @@ sv:
 
   #2.3.0
   label_crm_module_plural: Moduler
-  label_crm_contacts_default_currency: Standardvaluta för affärsmöjligheter
-  label_crm_contacts_list_partial_style: Kontaktliststil
-  label_crm_contacts_list_excerpt: Undantagslista
-  label_crm_contacts_list_cards: Kort
-  label_crm_contacts_list_list: Tabell
+  label_crm_list_partial_style: Kontaktliststil
+  label_crm_list_excerpt: Undantagslista
+  label_crm_list_cards: Kort
+  label_crm_list_list: Tabell
   field_contacts: Kontakt
   field_companies: Företag
-  label_crm_contacts_added_time_by: Tillagd av
+  label_crm_added_by: Tillagd av
   label_crm_contact_note_authoring_time: Visa noteringstid
   label_crm_contact_issues_filters: Uppgiftsfilter
-  label_crm_contacts_csv_import: Importera kontakter från CSV
-  label_crm_contacts_upload_encoding: Filkodning
-  label_crm_contacts_csv_file: CSV fil
-  label_crm_contacts_csv_separator: Separator
+  label_crm_csv_import: Importera kontakter från CSV
+  label_crm_upload_encoding: Filkodning
+  label_crm_csv_file: CSV fil
+  label_crm_csv_separator: Separator
   field_middle_name: Mellannamn
   field_job_title: Jobbtitel
   field_company: Företag

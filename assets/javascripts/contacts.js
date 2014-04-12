@@ -25,7 +25,7 @@ function updateCustomForm(url, form) {
   $.ajax({
     url: url,
     type: 'post',
-    data: form.serialize()
+    data: $(form).serialize()
   });
 }
 

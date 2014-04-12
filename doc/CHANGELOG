@@ -4,6 +4,14 @@ Redmine CRM plugin - customer relationship management plugin for redmine
 Copyright (C) 2011-2013 Kirill Bezrukov
 http://www.redminecrm.com/
 
+== 2013-xx v3.2.8
+
+* Deals board view
+* Coping deals
+* Create deals from global list (autorefresh deal form)
+* Select contacts and deals list view type
+* Show authoring info for deals
+
 == 2013-10-22 v3.2.7
 
 * Structured address for contacts

@@ -48,7 +48,7 @@
     <% if @contacts.empty? %>
         <p class="nodata"><%= l(:label_no_data) %></p>
     <% else %>
-      <%= render :partial => RedmineContacts.list_partial %>
+      <%= render :partial => contacts_list_style %>
     <% end %>
     </div>
     <% other_formats_links do |f| %>

@@ -193,20 +193,19 @@ ru:
 
   #2.3.0
   label_crm_module_plural: Модули
-  label_crm_contacts_default_currency: Валюта сделок по умолчанию
-  label_crm_contacts_list_partial_style: Отображать список контактов
-  label_crm_contacts_list_excerpt: Списком
-  label_crm_contacts_list_cards: Карточками
-  label_crm_contacts_list_list: Таблицей
+  label_crm_list_partial_style: Отображать как
+  label_crm_list_excerpt: Списком
+  label_crm_list_cards: Карточками
+  label_crm_list_list: Таблицей
   field_contacts: Контакт
   field_companies: Компания
-  label_crm_contacts_added_time_by: Добавил(а)
+  label_crm_added_by: Добавил(а)
   label_crm_contact_note_authoring_time: Показывать время заметок
   label_crm_contact_issues_filters: Фильтры по задачам
-  label_crm_contacts_csv_import: Импортировать из CSV
-  label_crm_contacts_upload_encoding: Кодировка файла
-  label_crm_contacts_csv_file: CSV файл
-  label_crm_contacts_csv_separator: Разделитель
+  label_crm_csv_import: Импортировать из CSV
+  label_crm_upload_encoding: Кодировка файла
+  label_crm_csv_file: CSV файл
+  label_crm_csv_separator: Разделитель
   field_middle_name: Отчество
   field_job_title: Должность
   field_company: Компания
@@ -285,13 +284,13 @@ ru:
   label_crm_monochrome_tags: Монохромные метки
 
   #3.2.7
-  label_crm_address: Address
-  label_crm_street1: Street 1
-  label_crm_street2: Street 2
-  label_crm_city: City
-  label_crm_region: 'State/County/Region'
-  label_crm_postcode: 'Postcode/ZIP'
-  label_crm_country: Country
+  label_crm_address: Адрес
+  label_crm_street1: Улица 1
+  label_crm_street2: Улица 2
+  label_crm_city: Город
+  label_crm_region: 'Регион'
+  label_crm_postcode: 'Почтовый индекс'
+  label_crm_country: Страна
   label_crm_countries:
     AU: Австралия
     AT: Австрия
@@ -439,7 +438,7 @@ ru:
     NU: Ниуе
     NZ: Новая Зеландия
     NC: Новая Каледония
-    NO: Норвегия
+    "NO": Норвегия
     AE: Объединенные Арабские Эмираты
     OM: Оман
     BV: Остров Буве
@@ -542,3 +541,16 @@ ru:
     JM: Ямайка
     JP: Япония
   label_crm_cross_project_contacts: Разрешить ссылаться на контакты во всех остальных проектах
+  label_crm_list_board: Доска
+  label_crm_default_list_style: Вид списка по умолчанию
+  label_crm_show_in_top_menu: Показывать в верхем меню
+  label_crm_show_in_app_menu: Показывать в меню приложения
+  label_crm_money_settings: Деньги
+  label_crm_disable_taxes: Отключить налоги
+  label_crm_default_tax: Налог по умолчанию
+  label_crm_tax_type: Тип налога
+  label_crm_tax_type_inclusive: Налог включен с общую сумму
+  label_crm_tax_type_exclusive: Налог добавлен к общей сумме
+  label_crm_default_currency: Валюта по умолчанию
+  label_crm_thousands_delimiter: Разделитель разрядов
+  label_crm_decimal_separator: Десятичный разделитель

@@ -197,20 +197,19 @@ az:
 
   #2.3.0
   label_crm_module_plural: Modullar
-  label_crm_contacts_default_currency: Susmaya görə sazişlərin valyutası
-  label_crm_contacts_list_partial_style: Əlaqə məlumatlarının siyahısını əks etdirmək
-  label_crm_contacts_list_excerpt: Siyahı
-  label_crm_contacts_list_cards: Kartoçkalarla
-  label_crm_contacts_list_list: Cədvəl ilə
+  label_crm_list_partial_style: Əlaqə məlumatlarının siyahısını əks etdirmək
+  label_crm_list_excerpt: Siyahı
+  label_crm_list_cards: Kartoçkalarla
+  label_crm_list_list: Cədvəl ilə
   field_contacts: Əlaqə məlumatı
   field_companies: Şöbə
-  label_crm_contacts_added_time_by: Əlavə edib
+  label_crm_added_by: Əlavə edib
   label_crm_contact_note_authoring_time: Qeydlərin vaxtını göstərmək
   label_crm_contact_issues_filters: Tapşırıqlara görə filtrlər
-  label_crm_contacts_csv_import: CSV-dən daxil etmək
-  label_crm_contacts_upload_encoding: Faylın kodlaşdırılması
-  label_crm_contacts_csv_file: CSV fayl
-  label_crm_contacts_csv_separator: Ayırıcı
+  label_crm_csv_import: CSV-dən daxil etmək
+  label_crm_upload_encoding: Faylın kodlaşdırılması
+  label_crm_csv_file: CSV fayl
+  label_crm_csv_separator: Ayırıcı
   field_middle_name: Atasının adı
   field_job_title: Vəzifə
   field_company: Şöbə

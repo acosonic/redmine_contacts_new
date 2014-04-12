@@ -41,23 +41,23 @@ module RedmineContacts
         @imap.select(folder)
         msg_count = 0
 
-        @imap.search(['NOT', 'SEEN']).each do |message_id|
-          msg = @imap.fetch(message_id,'RFC822')[0].attr['RFC822']
-          logger.info "ContactsMailHandler: Receiving message #{message_id}" if logger && logger.info?
+        @imap.uid_search(['NOT', 'SEEN']).each do |uid|
+          msg = @imap.uid_fetch(uid,'RFC822')[0].attr['RFC822']
+          logger.info "ContactsMailHandler: Receiving message #{uid}" if logger && logger.info?
           msg_count += 1
 
           if mailer.receive(msg, options)
-            logger.info "ContactsMailHandler: Message #{message_id} successfully received" if logger && logger.info?
+            logger.info "ContactsMailHandler: Message #{uid} successfully received" if logger && logger.info?
             if imap_options[:move_on_success] && imap_options[:move_on_success] != folder
-              @imap.copy(message_id, imap_options[:move_on_success])
+                @imap.uid_copy(uid, imap_options[:move_on_success])
             end
-            @imap.store(message_id, "+FLAGS", [:Seen, :Deleted])
+            @imap.uid_store(uid, "+FLAGS", [:Seen, :Deleted])
           else
-            logger.info "ContactsMailHandler: Message #{message_id} can not be processed" if logger && logger.info?
-            @imap.store(message_id, "+FLAGS", [:Seen])
+            logger.info "ContactsMailHandler: Message #{uid} can not be processed" if logger && logger.info?
+            @imap.uid_store(uid, "+FLAGS", [:Seen])
             if imap_options[:move_on_failure]
-              @imap.copy(message_id, imap_options[:move_on_failure])
-              @imap.store(message_id, "+FLAGS", [:Deleted])
+              @imap.uid_copy(uid, imap_options[:move_on_failure])
+              @imap.uid_store(uid, "+FLAGS", [:Deleted])
             end
           end
         end
@@ -88,16 +88,16 @@ module RedmineContacts
             pop_session.each_mail do |msg|
               msg_count += 1
               message = msg.pop
-              message_id = (message =~ /^Message-ID: (.*)/ ? $1 : '').strip
+              uid = (message =~ /^Message-ID: (.*)/ ? $1 : '').strip
               if mailer.receive(message, options)
                 msg.delete
-                logger.info "--> ContactsMailHandler: Message #{message_id} processed and deleted from the server" if logger && logger.info?
+                logger.info "--> ContactsMailHandler: Message #{uid} processed and deleted from the server" if logger && logger.info?
               else
                 if delete_unprocessed
                   msg.delete
-                  logger.info "--> ContactsMailHandler: Message #{message_id} NOT processed and deleted from the server" if logger && logger.info?
+                  logger.info "--> ContactsMailHandler: Message #{uid} NOT processed and deleted from the server" if logger && logger.info?
                 else
-                  logger.info "--> ContactsMailHandler: Message #{message_id} NOT processed and left on the server" if logger && logger.info?
+                  logger.info "--> ContactsMailHandler: Message #{uid} NOT processed and left on the server" if logger && logger.info?
                 end
               end
             end
