@@ -19,9 +19,8 @@
 # You should have received a copy of the GNU General Public License
 # along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
 
-include ContactsMoneyHelper
-
 module ContactsHelper
+  include ContactsMoneyHelper
 
   def contact_tabs(contact)
     contact_tabs = []

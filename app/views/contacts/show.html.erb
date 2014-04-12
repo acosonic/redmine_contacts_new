@@ -4,10 +4,10 @@
 
 <div class="contextual">
 	<% replace_watcher ||= 'watcher' %>
+	<%= watcher_link(@contact, User.current) %>
 	<%= link_to l(:label_profile), user_path(@contact.redmine_user), :class => 'icon icon-user' unless @contact.redmine_user.blank? %>
 	<%= link_to(l(:button_create), {:controller => 'users', :action => 'new_from_contact', :contact_id => @contact.id, :id => 'current'}, :class => 'icon icon-user') if (User.current.admin? && @contact.redmine_user.blank? && !@contact.email.blank?) %>
 	<%= link_to_if_authorized l(:label_crm_send_mail), {:controller => 'contacts', :action => 'edit_mails', :ids => [@contact.id], :project_id => @project}, :class => 'icon icon-email' unless @contact.primary_email.blank?  %>
-	<%= watcher_tag(@contact, User.current, {:id => replace_watcher, :replace => ['watcher','watcher2']}) %>
 	<%= link_to l(:button_edit), {:controller => 'contacts', :action => 'edit', :project_id => @project, :id => @contact}, :class => 'icon icon-edit' if @contact.editable? %>
 	<%= link_to l(:button_delete), {:controller => 'contacts', :action => 'destroy', :project_id => @project, :id => @contact}, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' if @contact.deletable? %>
 </div>
