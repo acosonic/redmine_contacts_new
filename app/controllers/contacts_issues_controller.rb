@@ -1,7 +1,7 @@
 # This file is a part of Redmine CRM (redmine_contacts) plugin,
 # customer relationship management plugin for Redmine
 #
-# Copyright (C) 2011-2013 Kirill Bezrukov
+# Copyright (C) 2011-2014 Kirill Bezrukov
 # http://www.redminecrm.com/
 #
 # redmine_contacts is free software: you can redistribute it and/or modify
@@ -84,7 +84,7 @@ class ContactsIssuesController < ApplicationController
   end
 
   def autocomplete_for_contact
-    @contacts = Contact.visible.includes(:avatar).order_by_name.live_search(params[:q]).by_project(params[:cross_project_contacts] == "1" ? nil : @project).limit(100).all
+    @contacts = Contact.visible.includes(:avatar).order_by_name.live_search(params[:q]).by_project(params[:cross_project_contacts] == "1" ? nil : @project).limit(100)
     if @issue
       @contacts -= @issue.contacts
     end
@@ -121,6 +121,5 @@ class ContactsIssuesController < ApplicationController
       end
     end
   end
-
 
 end

@@ -1,7 +1,7 @@
 # This file is a part of Redmine CRM (redmine_contacts) plugin,
 # customer relationship management plugin for Redmine
 #
-# Copyright (C) 2011-2013 Kirill Bezrukov
+# Copyright (C) 2011-2014 Kirill Bezrukov
 # http://www.redminecrm.com/
 #
 # redmine_contacts is free software: you can redistribute it and/or modify
@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
 
-CONTACTS_VERSION_NUMBER = '3.2.12'
+CONTACTS_VERSION_NUMBER = '3.2.13'
 CONTACTS_VERSION_STATUS = ''
 
 ActiveRecord::Base.observers += [:contact_observer, :note_observer]
@@ -117,7 +117,6 @@ Redmine::Plugin.register :redmine_contacts do
                           :caption => :label_deal_plural, 
                           :if => Proc.new{User.current.allowed_to?({:controller => 'deals', :action => 'index'}, 
                                           nil, {:global => true}) && ContactsSetting.contacts_show_in_app_menu? }
-
 
   menu :admin_menu, :contacts, {:controller => 'settings', :action => 'plugin', :id => "redmine_contacts"}, :caption => :contacts_title
 

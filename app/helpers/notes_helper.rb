@@ -3,7 +3,7 @@
 # This file is a part of Redmine CRM (redmine_contacts) plugin,
 # customer relationship management plugin for Redmine
 #
-# Copyright (C) 2011-2013 Kirill Bezrukov
+# Copyright (C) 2011-2014 Kirill Bezrukov
 # http://www.redminecrm.com/
 #
 # redmine_contacts is free software: you can redistribute it and/or modify
@@ -51,7 +51,7 @@ module NotesHelper
             format_time(created).to_s + '</span>').html_safe
     else
       authoring(created, author, options={})
-    end  
+    end
   end
   
   def add_note_ajax(note, note_source, show_info = false)
@@ -145,7 +145,7 @@ module NotesHelper
                   ]
       # Export project custom fields if project is given
       # otherwise export custom fields marked as "For all projects"
-      custom_fields = NoteCustomField.all
+      custom_fields = NoteCustomField.order(:name)
       custom_fields.each {|f| headers << f.name}
       # Description in the last column
       csv << headers.collect {|c| Redmine::CodesetUtil.from_utf8(c.to_s, encoding) }
