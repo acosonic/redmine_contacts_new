@@ -44,11 +44,11 @@ de:
   label_crm_note_added: Die Anmerkung wurde hinzugefügt
   label_crm_note_read_more: (weiter lesen)
 
-  label_deal_plural: Verkaufschancen
+  label_deal_plural: Verkaufspotentiale
   label_crm_contractor_plural: Verkaufskontakte
-  label_deal: Verkaufschance
-  label_crm_deal_new: Neue Verkaufschance
-  label_crm_deal_edit_information: Verkaufschance bearbeiten
+  label_deal: Verkaufspotential
+  label_crm_deal_new: Neues Verkaufspotential
+  label_crm_deal_edit_information: Verkaufspotential bearbeiten
   label_crm_deal_change_status: Status ändern
   label_crm_statistics: Statistiken
 
@@ -108,9 +108,9 @@ de:
   permission_view_contacts: Kontakte anzeigen
   permission_edit_contacts: Kontakte bearbeiten
   permission_delete_contacts: Kontakte löschen
-  permission_view_deals: Verkaufschance anzeigen
-  permission_edit_deals: Verkaufschance bearbeiten
-  permission_delete_deals: Verkaufschance löschen
+  permission_view_deals: Verkaufspotentiale anzeigen
+  permission_edit_deals: Verkaufspotential bearbeiten
+  permission_delete_deals: Verkaufspotential löschen
   permission_add_notes: Anmerkungen hinzufügen
   permission_delete_notes: Anmerkungen löschen
   permission_delete_own_notes: Eigene Anmerkungen löschen
@@ -120,9 +120,9 @@ de:
   label_crm_deal_category_plural: Vertriebskategorien
   label_crm_deal_category_new: Neue Vertriebskategorie
   text_deal_category_destroy_assignments: Kategoriezuweisungen entfernen
-  text_deal_category_destroy_question: "Einige Verkaufschancen (%{count}) sind dieser Kategorie zugeordnet. Was wollen Sie tun?"
-  text_deal_category_reassign_to: Neuzuweisung der Verkaufschancen zu dieser Kategorie
-  text_deals_destroy_confirmation: 'Sind Sie sicher, dass Sie die ausgewählten Verkaufschancen löschen wollen?'
+  text_deal_category_destroy_question: "Einige Verkaufspotentiale (%{count}) sind dieser Kategorie zugeordnet. Was wollen Sie tun?"
+  text_deal_category_reassign_to: Neuzuweisung der Verkaufspotential zu dieser Kategorie
+  text_deals_destroy_confirmation: 'Sind Sie sicher, dass Sie die ausgewählten Verkaufspotentiale löschen wollen?'
   label_crm_deal_status_plural: Status
   label_crm_deal_status: Status
   field_deal_status_is_closed: Geschlossen
@@ -135,13 +135,13 @@ de:
   #2.0.1
   label_crm_user_format: Format Kontaktname
   label_crm_my_contact_plural: Mir zugeordnete Kontakte
-  label_crm_my_deal_plural: Mir zugeordnete offene Verkaufschancen
+  label_crm_my_deal_plural: Mir zugeordnete offene Verkaufspotentiale
   label_crm_contact_view_all: Alle Kontakte anzeigen
-  label_crm_deal_view_all: Alle Verkaufschancen anzeigen
+  label_crm_deal_view_all: Alle Verkaufspotentiale anzeigen
 
   #2.0.2
   label_crm_bulk_edit_selected_contacts: Alle ausgewählten Kontakte bearbeiten
-  label_crm_bulk_edit_selected_deals: Alle ausgewählten Verkaufschancen bearbeiten
+  label_crm_bulk_edit_selected_deals: Alle ausgewählten Verkaufspotentiale bearbeiten
   label_crm_bulk_send_mail_selected_contacts: Sende E-Mail zu ausgewählten Kontakten
   field_add_tags: Tags hinzufügen
   field_delete_tags: Tags löschen
@@ -166,7 +166,7 @@ de:
   label_crm_recently_added_contacts: Neuste Kontakte
   label_crm_created_by_me: Kontakte hinzugefügt von mir
   my_contacts: Meine Kontakte
-  my_deals: Meine Verkaufschancen
+  my_deals: Meine Verkaufspotentiale
 
   #2.2.0
   label_crm_note_type_email: E-Mail
@@ -175,12 +175,12 @@ de:
   field_deal_currency: Währung
   label_crm_my_contacts_stats: Contacts statistics for this month
   label_crm_contacts_created: Hinzugefügte Kontakte
-  label_crm_deals_created: Hinzugefügte Verkaufschancen
+  label_crm_deals_created: Hinzugefügte Verkaufspotentiale
   my_contacts_avatars: Meine Kontaktfotos
   my_contacts_stats: Statistiken zu Kontakten
   label_crm_add_into: Hinzufügen in
   label_crm_delete_from: Löschen von
-  label_crm_show_deaks_tab: Verkaufschancen-Reiter anzeigen
+  label_crm_show_deaks_tab: Verkaufspotentiale-Reiter anzeigen
   label_crm_show_on_projects_show: Kontakte auf Projekt-Übersichtsseite anzeigen
 
   #2.2.1
@@ -188,19 +188,20 @@ de:
 
   #2.3.0
   label_crm_module_plural: Module
-  label_crm_list_partial_style: Liste
-  label_crm_list_excerpt: Einspalte Liste
-  label_crm_list_cards: Karten
-  label_crm_list_list: Tabelle
+  label_crm_contacts_default_currency: Standard Währung für Verfaufschange
+  label_crm_contacts_list_partial_style: Kontakt-Listenansicht
+  label_crm_contacts_list_excerpt: Einspalte Liste
+  label_crm_contacts_list_cards: Karten
+  label_crm_contacts_list_list: Tabelle
   field_contacts: Kontakt
   field_companies: Unternehmen
-  label_crm_added_by: Hinzugefügt von
+  label_crm_contacts_added_time_by: Hinzugefügt von
   label_crm_contact_note_authoring_time: Zeige Anmerkung mit Uhrzeit
   label_crm_contact_issues_filters: Ticketfilter
-  label_crm_csv_import: Kontakte von CSV importieren
-  label_crm_upload_encoding: Datei Encoding
-  label_crm_csv_file: CSV Datei
-  label_crm_csv_separator: Separator
+  label_crm_contacts_csv_import: Kontakte von CSV importieren
+  label_crm_contacts_upload_encoding: Datei Encoding
+  label_crm_contacts_csv_file: CSV Datei
+  label_crm_contacts_csv_separator: Separator
   field_middle_name: Zwischenname
   field_job_title: Berufsbezeichnung
   field_company: Unternehmen
@@ -214,7 +215,7 @@ de:
   button_contacts_edit_query: Abfrage bearbeiten
   button_contacts_delete_query: Abfrage löschen
   permission_manage_public_contacts_queries: Öffentliche Abfragen verwalten
-  permission_add_deals: Verkaufschancen hinzufügen
+  permission_add_deals: Verkaufspotential hinzufügen
   permission_add_contacts: Kontakte hinzufügen
   permission_save_contacts_queries: Abfrage speichern
 
@@ -234,16 +235,16 @@ de:
   #3.1.0
   label_crm_contact_added: Kontakt hinzugefügt
   label_crm_note_added: Kommentar hinzugefügt
-  label_crm_deal_added: Verkaufschance hinzugefügt
-  label_crm_deal_updated: Verkaufschancen aktualisiert
+  label_crm_deal_added: Verkaufspotential hinzugefügt
+  label_crm_deal_updated: Verkaufspotential aktualisiert
   text_crm_contact_added: "Kontakt %{name} wurde von %{author} hinzugefügt."
-  text_crm_deal_added: "Verkaufschance %{name} wurde von %{author} hinzugefügt."
-  text_crm_deal_status_changed: "Status der Verkaufschance von %{old} auf %{new} geändert"
-  text_crm_deal_updated: "Verkaufschance %{name} wurde von %{author} geändert."
+  text_crm_deal_added: "Verkaufspotential %{name} wurde von %{author} hinzugefügt."
+  text_crm_deal_status_changed: "Status der Verkaufspotential von %{old} auf %{new} geändert"
+  text_crm_deal_updated: "Verkaufspotential %{name} wurde von %{author} geändert."
   label_crm_contacts_cc: Cc
   label_crm_contacts_bcc: Bcc
   label_crm_contact_import: Import von CSV
-  permission_import_deals: Verkaufschancen importieren
+  permission_import_deals: Verkaufspotentiale importieren
   label_crm_single_quotes: "Einfache Anführungszeichen (')"
   label_crm_double_quotes: "Doppelte Anführungszeichen (\")"
   label_crm_quotes_type: Anführungszeichentyp
@@ -257,14 +258,14 @@ de:
   #3.2.0
   label_crm_probability: Wahrscheinlichkeit
   label_crm_deal_status_type: Statustyp
-  label_crm_select_companies: Filtere Firmen im Vertrag
+  label_crm_select_companies: Filtere Firmen in Verkaufspotentiale
   label_crm_expected_revenue: Erwarte Einnahmen
   label_crm_deal_due_date: Fälligkeit
 
   #3.2.2
-  label_crm_show_deals_in_top_menu: Zeige Verträge im oberen Menü
+  label_crm_show_deals_in_top_menu: Zeige Verkaufspotentiale im oberen Menü
   label_crm_show_details: Zeige Details
-  label_crm_has_deals: Hat Verträge
+  label_crm_has_deals: Hat Verkaufspotentiale
   label_crm_has_open_issues: Ticket öffnen
   label_crm_note: Hinweis
 
@@ -272,20 +273,20 @@ de:
   notice_failed_to_save_contacts: "Speichern von %{count} Kontakt(en) von %{total} fehlgeschlagen: %{ids}."
 
   #3.2.6
-  project_module_deals: Verkaufschancen
-  permission_manage_deals: Verkaufschancen verwalten
-  label_crm_deals_from_subprojects: Verkaufschancen für Unterprojekte anzeigen
+  project_module_deals: Verkaufspotentiale
+  permission_manage_deals: Verkaufspotentiale verwalten
+  label_crm_deals_from_subprojects: Verkaufspotentiale für Unterprojekte anzeigen
   label_crm_megre_tags: Tags zusammenführen
   label_crm_monochrome_tags: Schwarzweiß Tags
 
   #3.2.7
-  label_crm_address: Address
-  label_crm_street1: Street 1
-  label_crm_street2: Street 2
-  label_crm_city: City
-  label_crm_region: 'State'
-  label_crm_postcode: 'ZIP'
-  label_crm_country: Country
+  label_crm_address: Adresse
+  label_crm_street1: Straße 1
+  label_crm_street2: Straße 2
+  label_crm_city: Ort
+  label_crm_region: Bundesland
+  label_crm_postcode: PLZ
+  label_crm_country: Land
   label_crm_countries:
     AF: Afghanistan
     AX: Alandinseln
@@ -535,4 +536,22 @@ de:
     GQ: Äquatorialguinea
     ET: Äthiopien
     AT: Österreich
-  label_crm_cross_project_contacts: Allow cross-project contacts relations
+  label_crm_cross_project_contacts: Projektübergreifende Kontakte erlauben
+  label_crm_list_board: Board
+  label_crm_default_list_style: Standard-Listenansicht
+  label_crm_show_in_top_menu: Im oberen Menü anzeigen
+  label_crm_show_in_app_menu: In App Menü anzeigen
+  label_crm_money_settings: Währung
+  label_crm_disable_taxes: Stuern deaktiviert
+  label_crm_default_tax: Standard Steuersatz
+  label_crm_tax_type: Steuerart
+  label_crm_tax_type_inclusive: Steuer eingeschlossen
+  label_crm_tax_type_exclusive: Steuer ausgeschlossen
+  label_crm_default_currency: Standard Währung
+  label_crm_thousands_delimiter: Tausendertrennzeichen
+  label_crm_decimal_separator: Dezimaltrennzeichen
+
+  #3.2.10
+  label_crm_add_contact_plural: Kontakt hinzufügen
+  label_crm_search_for_contact: Kontakt suchen
+  label_crm_major_currencies: Aktive Währungen

@@ -1,6 +1,11 @@
 div.contact {background:#f4e9f2; padding:6px; margin-bottom:6px;border: 1px solid #d7d7d7;}
 div.deal {background:#edfff2; padding:6px; margin-bottom:6px;border: 1px solid #d7d7d7;}
-form#add_task_form {background:#ffffff; display: block; padding:6px; margin-bottom:6px;border: 1px solid #d7d7d7; width: 92%;}
+form#add_issue_form {background:#ffffff; display: block; padding:6px; margin-bottom:6px;border: 1px solid #d7d7d7; width: 92%;}
+
+/**********************************************************************/
+/* CONTACTS COMMON
+/**********************************************************************/
+span.contact {display: inline-block;}
 
 /********************/
 /* CONTACT ISSUES		*/
@@ -26,14 +31,14 @@ table.list.issue td.contacts img.gravatar{
   margin: 0 4px 2px 0;
 }
 
-tr.issue td.contacts {
-	text-align: left;
-  white-space: normal;
-}
-
 div.contact-issues h3 a {
 	color: inherit;
 }
+
+#contacts_for_issue {height: 200px; overflow:auto;}
+#contacts_for_issue label {display: block;}
+input#contact_search{width:90%;}
+
 
 /********************/
 /*		ADD NOTE FORM		*/
@@ -277,8 +282,15 @@ table.list.contacts td.email
 	white-space: nowrap;
 }
 
+
 /**************************************************************/
-/*                   CONTACTS_DEALS_LIST														*/
+/*                   TABLE LIST                               */
+/**************************************************************/
+table.list td.contacts {text-align: left; white-space: normal;}
+table.list td.contact {text-align: left}
+
+/**************************************************************/
+/*                   CONTACTS_DEALS_LIST							  			*/
 /**************************************************************/
 
 

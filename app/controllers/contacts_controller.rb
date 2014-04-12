@@ -121,7 +121,7 @@ class ContactsController < ApplicationController
                                     :conditions => {:source_id  => source_id_cond,
                                                    :source_type => 'Contact'},
                                     :include => [:attachments],
-                                    :order => "created_on DESC"
+                                    :order => "#{Note.table_name}.created_on DESC"
 
     respond_to do |format|
       format.js if request.xhr?
@@ -220,7 +220,7 @@ class ContactsController < ApplicationController
                                     :per_page => 20,
                                     :joins => joins,
                                     :conditions => cond,
-                                    :order => "created_on DESC"
+                                    :order => "#{Note.table_name}.created_on DESC"
     @notes.compact!
 
 

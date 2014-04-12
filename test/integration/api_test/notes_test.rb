@@ -63,32 +63,6 @@ class Redmine::ApiTest::NotesTest < ActionController::IntegrationTest
     RedmineContacts::TestCase.prepare
   end
 
-  # context "POST /notes.xml" do
-  #   should_allow_api_authentication(:post,
-  #                                   '/notes.xml',
-  #                                   {:note => {:project_id => 1,
-  #                                              :source_id => 1,
-  #                                              :source_type => 'Contact',
-  #                                              :content => 'API test'}},
-  #                                   {:success_code => :created})
-
-  #   should "create note with the attributes" do
-  #     assert_difference('Note.count') do
-  #       post '/notes.xml', {:note => {:content => 'API test'},
-  #                                     :project_id => 1,
-  #                                     :source_id => 1,
-  #                                     :source_type => 'Contact'}, credentials('admin')
-  #     end
-
-  #     note = Note.first(:order => 'id DESC')
-  #     assert_equal 'API test', note.content
-
-  #     assert_response :created
-  #     assert_equal 'application/xml', @response.content_type
-  #     assert_tag 'note', :child => {:tag => 'id', :content => note.id.to_s}
-  #   end
-  # end
-
   test "POST /notes.xml" do
     Redmine::ApiTest::Base.should_allow_api_authentication(:post,
                                     '/notes.xml',
@@ -98,7 +72,7 @@ class Redmine::ApiTest::NotesTest < ActionController::IntegrationTest
                                                :content => 'API test'}},
                                     {:success_code => :created})
 
-      assert_difference('Note.count') do
+      assert_difference('Note.count', 1) do
         post '/notes.xml', {:note => {:content => 'API test'},
                                       :project_id => 1,
                                       :source_id => 1,
@@ -132,5 +106,20 @@ class Redmine::ApiTest::NotesTest < ActionController::IntegrationTest
 
   end
 
+  test "DELETE /notes/1.xml" do
+      @parameters = {:note => {:content => 'API update'}}
+
+      Redmine::ApiTest::Base.should_allow_api_authentication(:put,
+                                    '/notes/1.xml',
+                                    @parameters,
+                                    {:success_code => :ok})
+
+      assert_difference('Note.count', -1) do
+        delete '/notes/1.xml', @parameters, credentials('admin')
+        assert_response :success
+      end
+      assert_nil Note.find_by_id(1)
+
+  end
 
 end

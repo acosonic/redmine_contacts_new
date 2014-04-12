@@ -185,7 +185,7 @@ class ContactsQuery < ActiveRecord::Base
                            "city" => { :type => :text, :order => 8, :name => l(:label_crm_city)},
                            "region" => { :type => :text, :order => 9, :name => l(:label_crm_region)},
                            "postcode" => { :type => :text, :order => 10, :name => l(:label_crm_postcode)},
-                           "country_code" => { :type => :list, :values => l(:label_crm_countries).map{|k, v| [v, k]}, :order => 11, :name => l(:label_crm_country)},
+                           "country_code" => { :type => :list_optional, :values => l(:label_crm_countries).map{|k, v| [v, k]}, :order => 11, :name => l(:label_crm_country)},
                            "is_company" => { :type => :list, :values => [[l(:general_text_yes), ActiveRecord::Base.connection.quoted_true.gsub(/'/, '')], [l(:general_text_no), ActiveRecord::Base.connection.quoted_false.gsub(/'/, '')]], :order => 12 },
                            "last_note" => { :type => :date_past, :order => 13 },
                            "has_deals" => {:type => :list, :values => [[l(:general_text_yes), "1"], [l(:general_text_no), "0"]], :order => 14, :name => l(:label_crm_has_deals)},

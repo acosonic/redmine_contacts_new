@@ -31,7 +31,7 @@ class Contact < ActiveRecord::Base
   VISIBILITY_PUBLIC = 1
   VISIBILITY_PRIVATE = 2
 
-  delegate :street1, :city, :country, :postcode, :region, :to => :address, :allow_nil => true
+  delegate :street1, :city, :country, :postcode, :region, :post_address, :to => :address, :allow_nil => true
 
   has_many :notes, :as => :source, :class_name => 'ContactNote', :dependent => :delete_all, :order => "created_on DESC"
   belongs_to :assigned_to, :class_name => 'User', :foreign_key => 'assigned_to_id'
@@ -87,27 +87,19 @@ class Contact < ActiveRecord::Base
   scope :order_by_name, :order => "#{Contact.table_name}.last_name, #{Contact.table_name}.first_name"
   scope :order_by_creation, :order => "#{Contact.table_name}.created_on DESC"
 
-  scope :by_name, lambda {|search| {:conditions =>   ["(LOWER(#{Contact.table_name}.first_name) LIKE ? OR
-                                                                  LOWER(#{Contact.table_name}.last_name) LIKE ? OR
-                                                                  LOWER(#{Contact.table_name}.middle_name) LIKE ?)",
-                                                                 "%" + search.downcase + "%",
-                                                                 "%" + search.downcase + "%",
-                                                                 "%" + search.downcase + "%"] }}
+  scope :by_name, lambda {|search| where("(LOWER(#{Contact.table_name}.first_name) LIKE LOWER(:p) OR
+                                                                  LOWER(#{Contact.table_name}.last_name) LIKE LOWER(:p) OR
+                                                                  LOWER(#{Contact.table_name}.middle_name) LIKE LOWER(:p))",
+                                                                  {:p => "%" + search.downcase + "%"})}
 
-  scope :live_search, lambda {|search| {:conditions =>   ["(LOWER(#{Contact.table_name}.first_name) LIKE ? OR
-                                                                  LOWER(#{Contact.table_name}.last_name) LIKE ? OR
-                                                                  LOWER(#{Contact.table_name}.middle_name) LIKE ? OR
-                                                                  LOWER(#{Contact.table_name}.company) LIKE ? OR
-                                                                  LOWER(#{Contact.table_name}.email) LIKE ? OR
-                                                                  LOWER(#{Contact.table_name}.phone) LIKE ? OR
-                                                                  LOWER(#{Contact.table_name}.job_title) LIKE ?)",
-                                                                 "%" + search.downcase + "%",
-                                                                 "%" + search.downcase + "%",
-                                                                 "%" + search.downcase + "%",
-                                                                 "%" + search.downcase + "%",
-                                                                 "%" + search.downcase + "%",
-                                                                 "%" + search.downcase + "%",
-                                                                 "%" + search.downcase + "%"] }}
+  scope :live_search, lambda {|search| where("(LOWER(#{Contact.table_name}.first_name) LIKE LOWER(:p) OR
+                                               LOWER(#{Contact.table_name}.last_name) LIKE LOWER(:p) OR
+                                               LOWER(#{Contact.table_name}.middle_name) LIKE LOWER(:p) OR
+                                               LOWER(#{Contact.table_name}.company) LIKE LOWER(:p) OR
+                                               LOWER(#{Contact.table_name}.email) LIKE LOWER(:p) OR
+                                               LOWER(#{Contact.table_name}.phone) LIKE LOWER(:p) OR
+                                               LOWER(#{Contact.table_name}.job_title) LIKE LOWER(:p))",
+                                             {:p => "%" + search.downcase + "%"})}
 
 
 

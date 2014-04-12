@@ -237,7 +237,7 @@ en:
   label_crm_contact_note_plural: Contacts notes
   label_crm_deal_note_plural: Deal notes
   label_crm_contact_all_note_plural: All notes
-  error_unable_delete_deal_status: Unable delete deal status
+  error_unable_delete_deal_status: Unable to delete deal status
   label_crm_contacts_hidden: Hidden settings
 
   #3.1.0
@@ -574,3 +574,12 @@ en:
   label_crm_default_currency: Default currency
   label_crm_thousands_delimiter: Thousands delimiter
   label_crm_decimal_separator: Decimal separator
+
+  #3.2.10
+  label_crm_add_contact_plural: Add contacts
+  label_crm_search_for_contact: Search for contact
+  label_crm_major_currencies: Major currencies
+
+  #3.2.11
+  label_crm_post_address_format: Post address format
+  label_crm_post_address_format_macros: "Address format macros: %{macros}"

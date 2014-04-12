@@ -17,8 +17,9 @@
 # You should have received a copy of the GNU General Public License
 # along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
 
-require_dependency 'redmine_contacts/utils/thumbnail.rb'
-require_dependency 'redmine_contacts/utils/check_mail.rb'
+require_dependency 'redmine_contacts/utils/thumbnail'
+require_dependency 'redmine_contacts/utils/check_mail'
+require_dependency 'redmine_contacts/contacts_project_setting'
 
 # Patches
 require_dependency 'redmine_contacts/patches/compatibility_patch'
@@ -49,16 +50,17 @@ require_dependency 'redmine_contacts/hooks/views_layouts_hook'
 # Plugins
 require 'acts_as_viewable/init'
 require 'acts_as_taggable_on_patch'
-# require 'acts_as_taggable_contacts/lib/acts_as_taggable_contacts'
+
+require 'redmine_contacts/liquid/liquid' if Gem::Specification.find_all_by_name('liquid').any?
 
 module RedmineContacts
 
   def self.companies_select
-  	RedmineContacts.settings[:select_companies_to_deal]
+  	RedmineContacts.settings["select_companies_to_deal"]
   end
 
   def self.cross_project_contacts?
-  	!!RedmineContacts.settings[:cross_project_contacts]
+  	!!RedmineContacts.settings["cross_project_contacts"]
   end
 
   def self.settings() Setting[:plugin_redmine_contacts].blank? ? {} : Setting[:plugin_redmine_contacts]  end

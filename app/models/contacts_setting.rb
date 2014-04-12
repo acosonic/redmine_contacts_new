@@ -93,6 +93,12 @@ class ContactsSetting < ActiveRecord::Base
     Setting.plugin_redmine_contacts["default_currency"] || 'USD'
   end
 
+  def self.major_currencies
+    currencies = Setting.plugin_redmine_contacts["major_currencies"].to_s.split(',').select{|c| !c.blank?}.map(&:strip)
+    currencies = %w(USD EUR GBP RUB CHF) if currencies.blank?
+    currencies.compact.uniq
+  end
+
   def self.default_tax
     Setting.plugin_redmine_contacts["default_tax"].to_f
   end
@@ -115,6 +121,14 @@ class ContactsSetting < ActiveRecord::Base
 
   def self.disable_taxes?
     !!Setting.plugin_redmine_contacts["disable_taxes"]
+  end
+
+  def self.post_address_format
+    unless Setting.plugin_redmine_contacts["post_address_format"].blank?
+      Setting.plugin_redmine_contacts["post_address_format"].to_s.strip
+    else
+      "%street1%\n%street2%\n%city%, %postcode%\n%region%\n%country%"
+    end
   end
 
   private

@@ -53,6 +53,20 @@ class Address < ActiveRecord::Base
     %w(street1 street2 city postcode region country).map{ |attr| self.send(attr) }.select{|a| !a.blank? }.join(', ')
   end
 
+  def post_address
+    address_template = ContactsSetting.post_address_format
+    address_template = address_template.gsub('%street1%', street1.to_s)
+    address_template = address_template.gsub('%street2%', street2.to_s)
+    address_template = address_template.gsub('%city%', city.to_s)
+    address_template = address_template.gsub('%town%', city.to_s)
+    address_template = address_template.gsub('%postcode%', postcode.to_s)
+    address_template = address_template.gsub('%zip%', postcode.to_s)
+    address_template = address_template.gsub('%region%', region.to_s)
+    address_template = address_template.gsub('%state%', region.to_s)
+    address_template = address_template.gsub('%country%', country.to_s)
+    address_template.gsub(/\r\n?/, "\n").gsub(/^$\n/, '').gsub(/^[, ]+|[, ]+$|[,]{2,}/,'').gsub(/\s{2,}/, ' ').strip
+  end
+
   private
 
   def populate_full_address

@@ -4,7 +4,37 @@ Redmine CRM plugin - customer relationship management plugin for redmine
 Copyright (C) 2011-2013 Kirill Bezrukov
 http://www.redminecrm.com/
 
-== 2013-xx v3.2.8
+== 2014-01-03 v3.2.12
+
+* French translation update (Olivier Houdas)
+* Check if deal status is in use before delete
+* Fixed bug with top and app menu links with project id
+* Fixed bug with show and export multiple values custom field
+
+== 2013-12-09 v3.2.11
+
+* Livesearch case insensitive for PostgreSQL
+* Added post address format settings
+* Spanish translation update (Luis Blasco)
+* German translation update (Alex Meindl)
+
+== 2013-12-06 v3.2.10
+
+* Contacts autocomplete UI cleanup
+* Export post code to CSV and Excel
+* New modal form for connect contacts and issues
+* Liquid drops and filters (new custom invoice template support)
+* Setting for major currencies list
+* Spanish translation update (Luis Blasco)
+* German translation update (Alex Meindl)
+
+== 2013-11-20 v3.2.9
+
+* Fixed bug with Redmine 2.4 compatibility (Show issue page SQL syntax error)
+* Brazilian Portuguese translation (Marcelo Fernandes)
+* Ajax moving deals on the board
+
+== 2013-11-16 v3.2.8
 
 * Deals board view
 * Coping deals

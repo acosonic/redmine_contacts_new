@@ -44,16 +44,17 @@ module ContactsMoneyHelper
   end
 
   def collection_for_currencies_select(default_currency = ContactsSetting.default_currency)
-    major_currencies(default_currency)
+    major_currencies_collection(default_currency)
   end
 
-  def major_currencies(default_currency)
-    arr = []
-    [default_currency.blank? ? nil : default_currency.to_s, :usd, :eur, :gbp, :rub, :jpy, :chf, :sgd].compact.each do |currency_code|
-      currency = Money::Currency.find(currency_code)
-      arr << ["#{currency.name} (#{currency.symbol})", currency.iso_code] if currency
-    end
-    arr.uniq
+  def major_currencies_collection(default_currency)
+    currencies = []
+    currencies << default_currency.to_s unless default_currency.blank?
+    currencies |= ContactsSetting.major_currencies
+    currencies.map do |c|
+      currency = Money::Currency.find(c)
+      ["#{currency.name} (#{currency.symbol})", currency.iso_code] if currency
+    end.compact.uniq
   end
 
   def all_currencies
@@ -68,7 +69,7 @@ module ContactsMoneyHelper
     return '' if price.blank?
     options[:decimal_mark] = ContactsSetting.decimal_separator unless options[:decimal_mark]
     options[:thousands_separator] = ContactsSetting.thousands_delimiter unless options[:thousands_separator]
-    Money.from_float(price, currency).format(options) rescue ActionController::Base.helpers.number_with_delimiter(price, :separator => ContactsSetting.decimal_separator, :delimiter => ContactsSetting.thousands_delimiter, :precision => 2)
+    Money.from_float(price.to_f, currency).format(options) rescue ActionController::Base.helpers.number_with_delimiter(price.to_f, :separator => ContactsSetting.decimal_separator, :delimiter => ContactsSetting.thousands_delimiter, :precision => 2)
   end
 
 end

@@ -60,14 +60,18 @@ class ContactTest < ActiveSupport::TestCase
 
 
   # Replace this with your real tests.
-  test "Should get first by email" do
-    emails = ["marat@mail.ru", "domoway.mail.ru"]
+  def test_find_by_emails_first_email
+    emails = ["marat@mail.ru", "domoway@mail.ru"]
     assert_equal 2, Contact.find_by_emails(emails).count
   end
 
-  test "Should get first by second email" do
+  def test_find_by_emails_second_email
     emails = ["marat@mail.com"]
     assert_equal 1, Contact.find_by_emails(emails).count
+  end
+
+  def test_scope_live_search
+    assert_equal 4, Contact.live_search('john').first.try(:id)
   end
 
   def test_visible_public_contacts

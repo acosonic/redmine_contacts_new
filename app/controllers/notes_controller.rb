@@ -105,6 +105,7 @@ class NotesController < ApplicationController
     respond_to do |format|
       format.js
       format.html {redirect_to :action => 'show', :project_id => @project, :id => @note.source }
+      format.api  { render_api_ok }
     end
 
     # redirect_to :action => 'show', :project_id => @project, :id => @contact

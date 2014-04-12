@@ -230,7 +230,7 @@ class ContactsControllerTest < ActionController::TestCase
     new_firstname = 'Fist name modified by ContactsControllerTest#test_put_update'
 
     put :update, :id => 1, :project_id => 1, :contact => {:first_name => new_firstname}
-    assert_redirected_to :action => 'show', :id => '1', :project_id => contact.project.id
+    assert_redirected_to :action => 'show', :id => '1', :project_id => 1
     contact.reload
     assert_equal new_firstname, contact.first_name
 

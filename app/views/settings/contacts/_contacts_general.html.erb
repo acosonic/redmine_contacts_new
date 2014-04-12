@@ -4,6 +4,12 @@
 </p>
 
 <p>
+  <label><%= l(:label_crm_post_address_format) %></label>
+  <%= text_area_tag  'settings[post_address_format]', ContactsSetting.post_address_format, :rows => 5 %>
+  <em class="info"><%= l(:label_crm_post_address_format_macros, :macros => '%street1%, %street2%, %city%, %town%, %postcode%, %zip%, %region%, %state%, %country%') %></em>
+</p>
+
+<p>
   <label><%= l(:label_crm_show_in_top_menu) %></label>
   <span id="watchers_inputs">
     <span class="floating" style="margin-left: 0px;">

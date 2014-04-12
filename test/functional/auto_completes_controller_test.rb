@@ -83,7 +83,7 @@ class AutoCompletesControllerTest < ActionController::TestCase
     assert_kind_of Hash, contact
     assert_equal 2, contact['id']
     assert_equal 2, contact['value']
-    assert_equal 'Marat Aminov', contact['label']
+    assert_equal 'Marat Aminov', contact['name']
   end
 
   def test_companies_should_return_json

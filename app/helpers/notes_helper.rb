@@ -44,10 +44,11 @@ module NotesHelper
   end
 
   def authoring_note(created, author, options={})
+    return "<span class=\"author\">#{l(options[:label] || :label_crm_added_by)} #{link_to_user(author).to_s}</span>".html_safe  if created.blank?
     if RedmineContacts.settings[:note_authoring_time]
       ('<span class="author">' + l(options[:label] || :label_crm_added_by) + ' ' +
-            link_to_user(author) + ', ' +
-            format_time(created) + '<span>').html_safe
+            link_to_user(author).to_s + ', ' +
+            format_time(created).to_s + '</span>').html_safe
     else
       authoring(created, author, options={})
     end  
@@ -98,7 +99,7 @@ module NotesHelper
 
     s = ""
     # TODO: Regexp does not work
-    images = obj.attachments.select{|att| att.is_contacts_thumbnailable?}
+    images = obj.attachments.select{|att| att.thumbnailable?}
     images = images.select{|att| att.filename.match(options[:regexp])} if options[:regexp]
     images.each do |att_file|
       attachment_url = url_for :controller => 'attachments', :action => 'download', :id => att_file, :filename => att_file.filename

@@ -92,6 +92,14 @@ module ContactsHelper
     )
   end
 
+  def contacts_check_box_tags(name, contacts)
+    s = ''
+    contacts.each do |contact|
+      s << "<label>#{ check_box_tag name, contact.id, false, :id => nil } #{contact_tag(contact, :no_link => true)}#{' (' + contact.company + ')' unless contact.company.blank? || contact.is_company? }</label>\n"
+    end
+    s.html_safe
+  end
+
   def note_source_url(note_source, options = {})
     polymorphic_path(note_source, options.merge(:project_id => @project))
     # return {:controller => note_source.class.name.pluralize.downcase, :action => 'show', :project_id => @project, :id => note_source.id }
@@ -137,43 +145,17 @@ module ContactsHelper
     span_id = field_id + '_selected_contact'
     link_id = field_id + '_edit_link'
     s = ""
+    unless @heads_for_contacts_autocomplete_included
+      s << javascript_include_tag(:contacts_autocomplete, :plugin => 'redmine_contacts')
+      @heads_for_contacts_autocomplete_included = true
+    end
     s << content_tag(:span, contact.to_s, :id => span_id)
     s << link_to(image_tag("edit.png", :alt => l(:label_edit), :style => "vertical-align:middle;"), "#",
-            :onclick => "$('##{span_id}').hide(); $(this).hide(); $('##{field_id}_add_link').show(); $('##{field_id}').show(); $('##{field_id}').val(''); return false;",
+            :onclick => "$('##{span_id}').hide(); $(this).hide(); $('##{field_id}_add_link').show(); $('##{field_id}').show(); $('##{field_id}').val(''); $('##{field_id}').focus(); return false;",
             :id => link_id,
             :style => display_field ? "display: none;" : "")
     s << text_field_tag(name, contact.blank? ? '' : contact.id, :style => display_field ? "" : "display: none;", :placeholder => l(:label_crm_contact_search), :id =>  field_id, :class => "autocomplete")
-    s << javascript_tag("$(document).ready(function() {
-                            function #{field_id}_contact( message ) {
-                                $('##{span_id}').text( message );
-                                $('##{span_id}').show();
-                                $('##{span_id}').scrollTop( 0 );
-                                $('##{field_id}').hide();
-                                $('##{link_id}').show();
-                                $('##{field_id}_add_link').hide();
-                            }
-
-                            $('##{field_id}').autocomplete({
-                              source: '#{escape_javascript auto_complete_contacts_path(:project_id => options[:project_id], :is_company => options[:is_company])}',
-                              select: function( event, ui ) {
-                                #{field_id}_contact( ui.item ?
-                                    ui.item.label:
-                                    'Nothing selected, input was ' + this.value);
-                              },
-                              minLength: 0
-                            })
-                            .data('ui-autocomplete')._renderItem = function( ul, item ) {
-                              return $('<li>')
-                                .append('<a>' + item.avatar + '&nbsp;' + item.label + (item.company.length != 0 ? ' (' + item.company + ') ' : '') + '</a>')
-                                .appendTo( ul );
-                            };
-
-                           $('##{field_id}').bind('click', function(){
-                                $(this).autocomplete('search', '');
-                           });
-
-                          });")
-
+    s << javascript_tag("initContactsAutocomplete('#{name}', '#{escape_javascript auto_complete_contacts_path(:project_id => options[:project_id], :is_company => options[:is_company])}', '#{escape_javascript options[:select_url]}');");
     s.html_safe
   end
 
@@ -190,7 +172,6 @@ module ContactsHelper
     # return image_tag(obj_icon, options.merge({:plugin => "redmine_contacts"})) if Rails::env == "development"
 
     if obj.is_a?(Deal)
-      # image_tag(obj_icon, options.merge({:plugin => "redmine_contacts"}))
       if obj.contact
         avatar_to(obj.contact, options)
       else
@@ -221,7 +202,7 @@ module ContactsHelper
 
   def contact_tag(contact, options={})
     avatar_size = options.delete(:size) || 16
-    if contact.visible?
+    if contact.visible? && !options[:no_link]
       contact_avatar = link_to(avatar_to(contact, :size => avatar_size), contact_path(contact, :project_id => @project), :id => "avatar")
       contact_name = link_to_source(contact, :project_id => @project)
     else

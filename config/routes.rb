@@ -75,7 +75,7 @@
 
 
 
-  match 'projects/:project_id/contacts/:contact_id/new_task' => 'contacts_tasks#new', :via => :post
+  match 'projects/:project_id/contacts/:contact_id/new_task' => 'contacts_issues#new', :via => :post
 
   match 'contacts/:contact_id/duplicates' => 'contacts_duplicates#index'
 
@@ -84,14 +84,6 @@
   match 'projects/:project_id/sales_funnel'  => 'sales_funnel#index'
   match 'sales_funnel/:action' => 'sales_funnel#index'
 
-
-
-  # match 'notes/:note_id' => 'notes#show', :via => :get, :as => "note"
-  # match 'notes/show/:note_id' => 'notes#show', :via => :get
-  # match 'notes/:note_id/edit' => 'notes#edit', :via => :get
-  # match 'notes/:note_id/update' => 'notes#update', :via => :put
-  # match 'notes/add_note' => 'notes#add_note'
-  # match 'notes/destroy' => 'notes#destroy'
 
   match 'auto_completes/taggable_tags' => 'auto_completes#taggable_tags', :via => :get, :as => 'auto_complete_taggable_tags'
   match 'auto_completes/contact_tags' => 'auto_completes#contact_tags', :via => :get, :as => 'auto_complete_contact_tags'
@@ -103,7 +95,7 @@
   match 'contacts_duplicates/search' => 'contacts_duplicates#search', :via => :get, :as => 'contacts_duplicates_search'
   match 'contacts_projects/:action' => 'contacts_projects'
   match 'contacts_tags/:action' => 'contacts_tags'
-  match 'contacts_tasks/:action' => 'contacts_tasks'
+  match 'contacts_issues/:action' => 'contacts_issues'
   match 'contacts_vcf/:action' => 'contacts_vcf'
   match 'deal_categories/:action' => 'deal_categories'
   match 'deal_contacts/:action' => 'deal_contacts'

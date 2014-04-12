@@ -554,3 +554,12 @@ ru:
   label_crm_default_currency: Валюта по умолчанию
   label_crm_thousands_delimiter: Разделитель разрядов
   label_crm_decimal_separator: Десятичный разделитель
+
+  #3.2.10
+  label_crm_add_contact_plural: Связать контакты
+  label_crm_search_for_contact: Найти контакт
+  label_crm_major_currencies: Основные валюты
+
+  #3.2.11
+  label_crm_post_address_format: Формат почтового адреса
+  label_crm_post_address_format_macros: "Макросы почтового формата: %{macros}"

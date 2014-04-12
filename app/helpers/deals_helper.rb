@@ -191,7 +191,7 @@ module DealsHelper
                   format_date(deal.created_on),
                   format_date(deal.updated_on)
                   ]
-        custom_fields.each {|f| fields << show_value(deal.custom_value_for(f)) }
+        deal.custom_field_values.each {|custom_value| fields << show_value(custom_value) }
         csv << fields.collect {|c| Redmine::CodesetUtil.from_utf8(c.to_s, encoding) }
       end
     end

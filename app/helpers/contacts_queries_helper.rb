@@ -38,8 +38,17 @@ module ContactsQueriesHelper
                       content_tag('th', h(column.caption))
   end
 
+
   def contacts_column_content(column, contact)
     value = column.value(contact)
+    if value.is_a?(Array)
+      value.collect {|v| contacts_column_value(column, contact, v)}.compact.join(', ').html_safe
+    else
+      contacts_column_value(column, contact, value)
+    end
+  end
+
+  def contacts_column_value(column, contact, value)
     case value.class.name
     when 'String'
       if column.name == :subject

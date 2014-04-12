@@ -19,7 +19,7 @@
     <% tags.each do |tag| %>
       <tr id="<%= tag.id %>" class="<%= cycle("odd", "even") %> hascontextmenu ">
         <td class="checkbox hide-when-print"><%= check_box_tag("ids[]", tag.id, false, :id => nil) %></td>
-        <td><%= tag_link(tag.name) %></td>
+        <td class="name"><%= tag_link(tag.name) %></td>
         <td class="buttons">
           <%= link_to l(:button_edit), edit_contacts_tag_path(tag),
                                          :class => 'icon icon-edit' %>

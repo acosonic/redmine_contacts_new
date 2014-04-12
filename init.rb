@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
 
-CONTACTS_VERSION_NUMBER = '3.2.8'
+CONTACTS_VERSION_NUMBER = '3.2.12'
 CONTACTS_VERSION_STATUS = ''
 
 ActiveRecord::Base.observers += [:contact_observer, :note_observer]
@@ -28,7 +28,6 @@ Redmine::Plugin.register :redmine_contacts do
   author 'RedmineCRM'
   description 'This is a CRM plugin for Redmine that can be used to track contacts and deals information'
   version CONTACTS_VERSION_NUMBER + '-pro' + CONTACTS_VERSION_STATUS
-
   url 'http://redminecrm.com'
   author_url 'mailto:support@redminecrm.com'
 
@@ -38,6 +37,7 @@ Redmine::Plugin.register :redmine_contacts do
     :use_gravatars => false,
     :name_format => :lastname_firstname.to_s,
     :auto_thumbnails  => true,
+    :major_currencies => "USD, EUR, GBP, RUB, CHF",
     :contact_list_default_columns => ["first_name", "last_name"],
     :max_thumbnail_file_size => 300
   }, :partial => 'settings/contacts/contacts'
@@ -61,7 +61,7 @@ Redmine::Plugin.register :redmine_contacts do
     permission :edit_contacts, {
       :contacts => [:edit, :update, :bulk_update, :bulk_edit],
       :notes => [:create, :destroy, :edit, :update],
-      :contacts_tasks => [:new, :add, :delete, :close],
+      :contacts_issues => [:new, :create_issue, :create, :delete, :close, :autocomplete_for_contact],
       :contacts_duplicates => [:index, :merge, :duplicates],
       :contacts_projects => [:add, :delete],
       :contacts_vcf => [:load]
@@ -109,14 +109,12 @@ Redmine::Plugin.register :redmine_contacts do
   menu :application_menu, :contacts,
                           {:controller => 'contacts', :action => 'index'},
                           :caption => :label_contact_plural,
-                          :param => :project_id,
-                          :if => Proc.new{User.current.allowed_to?({:controller => 'contacts', :action => 'index'}, 
-                                          nil, {:global => true}) && ContactsSetting.contacts_show_in_app_menu? }
+                          :if => Proc.new{ User.current.allowed_to?({:controller => 'contacts', :action => 'index'},
+                                          nil, {:global => true})  && ContactsSetting.contacts_show_in_app_menu? }
 
   menu :application_menu, :deals, 
                           {:controller => 'deals', :action => 'index'}, 
                           :caption => :label_deal_plural, 
-                          :param => :project_id, 
                           :if => Proc.new{User.current.allowed_to?({:controller => 'deals', :action => 'index'}, 
                                           nil, {:global => true}) && ContactsSetting.contacts_show_in_app_menu? }
 
@@ -132,7 +130,7 @@ Redmine::Plugin.register :redmine_contacts do
     search.register :deals
     search.register :deal_notes
   end
- 
+
 end
 
 require 'redmine_contacts'

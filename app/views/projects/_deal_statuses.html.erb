@@ -13,7 +13,7 @@
 		<% DealStatus.all( :order => "status_type, position").each do |status| %>
 
 			<tr class="<%= cycle 'odd', 'even' %>">
-			<td><span class="color" style="border: 1px solid #D7D7D7;background-color: <%= status.color_name %>;">&nbsp;&nbsp;&nbsp;&nbsp;</span> <%= h(status.name) %></td>
+			<td class="name"><span class="color" style="border: 1px solid #D7D7D7;background-color: <%= status.color_name %>;">&nbsp;&nbsp;&nbsp;&nbsp;</span> <%= h(status.name) %></td>
 		    <td align="center" style="width:15%;"><%= checked_image status.is_default? %></td>
 		  	<td align="center" style="width:15%;"><%= status.status_type_name %></td>
 			<td align="center" style="width:15%;">

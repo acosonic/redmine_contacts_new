@@ -60,7 +60,7 @@
 	<%= render :partial => 'common/sidebar' %>
 	<%= render :partial => 'attributes' %>
 	<%= call_hook(:view_contacts_sidebar_after_attributes, :contact => @contact) %>
-	<%= render :partial => 'contacts_tasks/related', :locals => {:contact => @contact, :tasks => @contact_issues} %>
+	<%= render :partial => 'contacts_issues/issues', :locals => {:contact => @contact, :issues => @contact_issues} %>
 	<%= call_hook(:view_contacts_sidebar_after_tasks, :contact => @contact) %>
 	<%= render :partial => 'common/notes_attachments', :object => @contact.notes_attachments %>    
 	<%= call_hook(:view_contacts_sidebar_after_notes_attachments, :contact => @contact) %>

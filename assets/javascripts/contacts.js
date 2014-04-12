@@ -1,5 +1,4 @@
-// Copyright (c) 2011-2012 Kirill Bezrukov
-
+// Copyright (c) 2011-2013 Kirill Bezrukov
 
 var noteFileFieldCount = 1;
 
