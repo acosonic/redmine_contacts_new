@@ -8,7 +8,7 @@ module RedmineContacts
         base.send(:include, InstanceMethods)
 
         base.class_eval do
-          alias_method_chain :custom_fields_tabs, :contacts_tab
+          #alias_method_chain :custom_fields_tabs, :contacts_tab
         end
       end
 
@@ -17,7 +17,7 @@ module RedmineContacts
           new_tabs = []
           new_tabs << {:name => 'ContactCustomField', :partial => 'custom_fields/index', :label => :label_contact_plural}
           new_tabs << {:name => 'DealCustomField', :partial => 'custom_fields/index', :label => :label_deal_plural}
-          new_tabs << {:name => 'NoteCustomField', :partial => 'custom_fields/index', :label => :label_note_plural}
+          new_tabs << {:name => 'NoteCustomField', :partial => 'custom_fields/index', :label => :label_crm_note_plural}
           return custom_fields_tabs_without_contacts_tab | new_tabs
         end
       end

@@ -1,3 +1,22 @@
+# This file is a part of Redmine CRM (redmine_contacts) plugin,
+# customer relationship management plugin for Redmine
+#
+# Copyright (C) 2011-2013 Kirill Bezrukov
+# http://www.redminecrm.com/
+#
+# redmine_contacts is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# redmine_contacts is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
+
 module CSVImportable
   class << self; attr_accessor :klass end
 
@@ -24,7 +43,7 @@ module CSVImportable
     else
       imported_instances.each_with_index do |instance, index|
         if !instance.new_record? && !instance.editable?
-          errors.add :base, "Row #{index + 2}: Permission restricted for changing #{klass.name}"  
+          errors.add :base, "Row #{index + 2}: Permission restricted for changing #{klass.name}"
         else
           instance.errors.full_messages.each do |message|
             errors.add :base, "Row #{index + 2}: #{message}"
@@ -47,10 +66,10 @@ protected
 private
   def build_custom_fields
     custom_fields_attributes = {}
-    klass.new.custom_field_values.each do |custom_field_value| 
+    klass.new.custom_field_values.each do |custom_field_value|
       custom_fields_attributes[custom_field_value.custom_field.id.to_s] = custom_field_value.custom_field.cast_value(row[custom_field_value.custom_field.name]).to_s
-    end 
-    custom_fields_attributes   
+    end
+    custom_fields_attributes
   end
 
   def load_imported_instances
@@ -63,9 +82,9 @@ private
           instance = klass.find_by_id(row['#']) || klass.new
           instance.attributes = build_from_fcsv_row(row)
           if instance.respond_to?(:custom_field_values)
-            instance.custom_field_values.each do |custom_field_value| 
+            instance.custom_field_values.each do |custom_field_value|
               custom_field_value.value = custom_field_value.custom_field.cast_value(row[custom_field_value.custom_field.name.underscore]).to_s
-            end 
+            end
           end
 
           instance.project = project if instance.respond_to?(:project=)
@@ -101,4 +120,3 @@ private
     commas > semicolons ? ',' : ';'
   end
 end
-

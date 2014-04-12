@@ -18,7 +18,7 @@
 						<%= deal_status_tag(@deal.status) %>
 						<% if authorize_for('deals', 'edit') %>
 						<span class="contextual">
-							<%= link_to l(:label_deal_change_status), {}, :onclick => "$('#edit_status_form').show(); $('#deal-status').hide(); return false;", :id => 'edit_status_link' %>
+							<%= link_to l(:label_crm_deal_change_status), {}, :onclick => "$('#edit_status_form').show(); $('#deal-status').hide(); return false;", :id => 'edit_status_link' %>
 						</span>
 						<% end %>
 					</div>
@@ -68,7 +68,7 @@
 </div>
 
 <div id="comments">
-	<h3><%= l(:label_note_plural) %></h3>
+	<h3><%= l(:label_crm_note_plural) %></h3>
 	<div id="notes">
 		<% @deal_events.each do |deal_event| %>
 			<% if deal_event[:object].is_a?(DealNote) %>

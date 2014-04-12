@@ -1,4 +1,4 @@
-<h2><%= l(:label_contact_new) %></h2>
+<h2><%= l(:label_crm_contact_new) %></h2>
 
 <%= labelled_form_for :contact, @contact, :url => {:action => 'create', :project_id => @project}, :html => { :multipart => true, :id => 'contact_form'} do |f|  %>
   <%= render :partial => 'form', :locals => {:f => f}  %>
@@ -10,7 +10,6 @@
 <% content_for :sidebar do %>
 	<%= render :partial => 'common/sidebar' %>
 	<%= render :partial => 'contacts_duplicates/duplicates' %>
-	<%= render :partial => 'contacts_vcf/load' %>
 <% end %>
 
 

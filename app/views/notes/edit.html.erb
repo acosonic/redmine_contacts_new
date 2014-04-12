@@ -2,7 +2,7 @@
 
 <%= render :partial => 'note_header', :object => @note %>
 
-<%= form_for @note, :url => {:controller => "notes", :action => 'update', :project_id => @project, :note_id => @note}, :html => { :multipart => true} do |f|  %> 
+<%= form_for @note, :url => {:controller => "notes", :action => 'update', :project_id => @project, :id => @note}, :html => { :multipart => true} do |f|  %>
 	<div class = "box">
 		<table>
 		  <tr>
@@ -16,16 +16,6 @@
 		</table>
 		<p class  = "content"><%= f.text_area :content , :cols => 80, :rows => 8, :class => 'wiki-edit', :label=>l(:field_contact_background)  %>
 		<%= wikitoolbar_for 'note_content' %>  </p>
-		<% if @note.custom_field_values.any? %>
-		<fieldset class="tabular" ><legend><%= l(:label_custom_field_plural) %></legend>
-		<% @note.custom_field_values.each do |value| %>
-		  <p>
-		    <%= custom_field_tag_with_label :note, value %>
-		  </p>
-		<% end -%>
-		</fieldset>	
-		<% end %>
-		<%= link_to_attachments @note, :author => false  %>
 	</div>
 
 	<fieldset><legend><%= l(:label_attachment_plural) %></legend>
@@ -35,17 +25,17 @@
 	<%= submit_tag l(:button_save) -%>
 <% end -%>
 
-<% html_title "#{l(:label_note_for)} #{@note.source.name}" %>    
+<% html_title "#{l(:label_crm_note_for)} #{@note.source.name}" %>
 
 <% content_for :sidebar do %>
-	<%= render :partial => 'common/sidebar' %>   
-	
+	<%= render :partial => 'common/sidebar' %>
+
 	<%= render :partial => 'common/recently_viewed' %>
-<% end %>	
+<% end %>
 
 
 <% content_for :header_tags do %>
 	<%= javascript_include_tag :contacts, :plugin => 'redmine_contacts'  %>
 	<%= stylesheet_link_tag :contacts, :plugin => 'redmine_contacts' %>
-	<%= stylesheet_link_tag :contacts_sidebar, :plugin => 'redmine_contacts' %>  
+	<%= stylesheet_link_tag :contacts_sidebar, :plugin => 'redmine_contacts' %>
 <% end %>

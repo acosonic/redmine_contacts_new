@@ -1,3 +1,22 @@
+# This file is a part of Redmine CRM (redmine_contacts) plugin,
+# customer relationship management plugin for Redmine
+#
+# Copyright (C) 2011-2013 Kirill Bezrukov
+# http://www.redminecrm.com/
+#
+# redmine_contacts is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# redmine_contacts is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
+
 class Contact < ActiveRecord::Base
   unloadable
 
@@ -12,6 +31,8 @@ class Contact < ActiveRecord::Base
   VISIBILITY_PUBLIC = 1
   VISIBILITY_PRIVATE = 2
 
+  delegate :street1, :city, :country, :postcode, :region, :to => :address, :allow_nil => true
+
   has_many :notes, :as => :source, :class_name => 'ContactNote', :dependent => :delete_all, :order => "created_on DESC"
   belongs_to :assigned_to, :class_name => 'User', :foreign_key => 'assigned_to_id'
   has_and_belongs_to_many :issues, :order => "#{Issue.table_name}.due_date", :uniq => true
@@ -20,10 +41,11 @@ class Contact < ActiveRecord::Base
   has_and_belongs_to_many :projects, :uniq => true
   belongs_to :author, :class_name => 'User', :foreign_key => 'author_id'
   has_one :avatar, :class_name => "Attachment", :as  => :container, :conditions => "#{Attachment.table_name}.description = 'avatar'", :dependent => :destroy
+  has_one :address, :dependent => :destroy, :as => :addressable, :class_name => "Address", :conditions => {:address_type => "business"}
+  has_many :addresses, :dependent => :destroy, :as => :addressable, :class_name => "Address"
 
   attr_accessor :phones
   attr_accessor :emails
-  acts_as_customizable
   acts_as_viewable
   acts_as_taggable
   acts_as_watchable
@@ -46,24 +68,24 @@ class Contact < ActiveRecord::Base
                                   "#{table_name}.middle_name",
                                   "#{table_name}.last_name",
                                   "#{table_name}.company",
-                                  "#{table_name}.address",
+                                  "#{Address.table_name}.full_address",
                                   "#{table_name}.background"],
                      :project_key => "#{Project.table_name}.id",
-                     :include => [:projects],
+                     :include => [:projects, :address],
                      # sort by id so that limited eager loading doesn't break with postgresql
                      :order_column => "#{table_name}.id"
 
-  scope :visible,
-        lambda {|*args| includes(:projects).where(Contact.visible_condition(args.shift || User.current, *args)) }
-  scope :deletable,
-        lambda {|*args| includes(:projects).where(Contact.deletable_condition(args.shift || User.current, *args)) }
-  scope :editable,
-        lambda {|*args| includes(:projects).where(Contact.editable_condition(args.shift || User.current, *args)) }
+  accepts_nested_attributes_for :address, :allow_destroy => true, :reject_if => proc {|attributes| Address.reject_address(attributes)}
 
-
+  scope :visible, lambda {|*args| includes(:projects).where(Contact.visible_condition(args.shift || User.current, *args)) }
+  scope :deletable, lambda {|*args| includes(:projects).where(Contact.deletable_condition(args.shift || User.current, *args)) }
+  scope :editable, lambda {|*args| includes(:projects).where(Contact.editable_condition(args.shift || User.current, *args)) }
   scope :by_project, lambda {|prj| joins(:projects).where("#{Project.table_name}.id = ?", prj) unless prj.blank? }
-
   scope :like_by, lambda {|field, search| {:conditions => ["LOWER(#{Contact.table_name}.#{field}) LIKE ?", search.downcase + "%"] }}
+  scope :companies, where(:is_company => true)
+  scope :people, where(:is_company => false)
+  scope :order_by_name, :order => "#{Contact.table_name}.last_name, #{Contact.table_name}.first_name"
+  scope :order_by_creation, :order => "#{Contact.table_name}.created_on DESC"
 
   scope :by_name, lambda {|search| {:conditions =>   ["(LOWER(#{Contact.table_name}.first_name) LIKE ? OR
                                                                   LOWER(#{Contact.table_name}.last_name) LIKE ? OR
@@ -77,7 +99,9 @@ class Contact < ActiveRecord::Base
                                                                   LOWER(#{Contact.table_name}.middle_name) LIKE ? OR
                                                                   LOWER(#{Contact.table_name}.company) LIKE ? OR
                                                                   LOWER(#{Contact.table_name}.email) LIKE ? OR
+                                                                  LOWER(#{Contact.table_name}.phone) LIKE ? OR
                                                                   LOWER(#{Contact.table_name}.job_title) LIKE ?)",
+                                                                 "%" + search.downcase + "%",
                                                                  "%" + search.downcase + "%",
                                                                  "%" + search.downcase + "%",
                                                                  "%" + search.downcase + "%",
@@ -85,18 +109,12 @@ class Contact < ActiveRecord::Base
                                                                  "%" + search.downcase + "%",
                                                                  "%" + search.downcase + "%"] }}
 
-  scope :companies, where(:is_company => true)
-  scope :people, where(:is_company => false)
 
-  scope :order_by_name, :order => "#{Contact.table_name}.last_name, #{Contact.table_name}.first_name"
-  scope :order_by_creation, :order => "#{Contact.table_name}.created_on DESC"
 
   # name or company is mandatory
   validates_presence_of :first_name
   validates_uniqueness_of :first_name, :scope => [:last_name, :middle_name, :company]
   validates_presence_of :project, :message => "Contact should have project"
-  validates_presence_of :address, if: -> { self.is_company? }
-  validates_presence_of :last_name, :company, :job_title, :email, :phone , unless: -> { self.is_company? }
 
   def self.visible_condition(user, options={})
     user_ids = [user.id] + user.groups.map(&:id)
@@ -122,11 +140,6 @@ class Contact < ActiveRecord::Base
 
     cond << ")"
 
-    # cond << " ( (#{table_name}.visibility = 1 #{'AND (1=0)' unless user.allowed_to_globally?(:view_contacts, {})})"
-    # cond << " OR (#{Project.allowed_to_condition(user, :view_contacts)} AND #{table_name}.visibility <> 2) "
-    # cond << " OR (#{Project.allowed_to_condition(user, :view_private_contacts)} "
-    # cond << " OR (#{Project.allowed_to_condition(user, :view_contacts)} "
-    # cond << " AND (#{table_name}.author_id = #{user.id} OR #{table_name}.assigned_to_id IN (#{user_ids.join(',')})))))"
   end
 
   def self.editable_condition(user, options={})
@@ -165,7 +178,7 @@ class Contact < ActiveRecord::Base
     options = {}
     options[:select] = "#{ActsAsTaggableOn::Tag.table_name}.*, COUNT(DISTINCT #{ActsAsTaggableOn::Tagging.table_name}.taggable_id) AS count"
     options[:joins] = joins.flatten
-    options[:group] = "#{ActsAsTaggableOn::Tag.table_name}.id, #{ActsAsTaggableOn::Tag.table_name}.name, #{ActsAsTaggableOn::Tag.table_name}.created_at, #{ActsAsTaggableOn::Tag.table_name}.updated_at, #{ActsAsTaggableOn::Tag.table_name}.color HAVING COUNT(*) > 0"
+    options[:group] = "#{ActsAsTaggableOn::Tag.table_name}.id, #{ActsAsTaggableOn::Tag.table_name}.name HAVING COUNT(*) > 0"
     options[:order] = "#{ActsAsTaggableOn::Tag.table_name}.name"
     options[:limit] = limit if limit
 
@@ -182,16 +195,17 @@ class Contact < ActiveRecord::Base
     @duplicates ||= (self.first_name.blank? && self.last_name.blank? && self.middle_name.blank?) ? [] : scope.visible.find(:all, :limit => limit)
   end
 
-  def employees
-    @employees ||= Contact.order_by_name.find(:all, :include => :avatar, :conditions => ["#{Contact.table_name}.company = ? AND #{Contact.table_name}.id <> ?", self.first_name, self.id])
+  def company_contacts
+    @contacts ||= Contact.order_by_name.includes(:avatar).where(["#{Contact.table_name}.is_company = ?  AND #{Contact.table_name}.company = ? AND #{Contact.table_name}.id <> ?", false, self.first_name, self.id])
   end
+  alias_method :employees, :company_contacts
 
   def redmine_user
     @redmine_user ||= User.find(:first, :conditions => {:mail => emails}) unless self.email.blank?
   end
 
   def contact_company
-    @contact_company ||= Contact.find_by_first_name(self.company)
+    @contact_company ||= Contact.find_by_first_name(self.company) unless self.company.blank?
   end
 
   def notes_attachments
@@ -267,7 +281,7 @@ class Contact < ActiveRecord::Base
     cond = "(1 = 0)"
     emails = emails.map{|e| e.downcase }
     emails.each do |mail|
-      cond << " OR (LOWER(#{Contact.table_name}.email) LIKE '%#{mail}%')"
+      cond << " OR (LOWER(#{Contact.table_name}.email) LIKE '%#{mail.gsub("'", "").gsub("\"", "")}%')"
     end
     contacts = Contact.find(:all, :conditions => cond)
     contacts.select{|c| (c.emails.map{|e| e.downcase } & emails).any? }

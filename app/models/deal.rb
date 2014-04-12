@@ -1,12 +1,31 @@
-class Deal < ActiveRecord::Base  
-  unloadable       
-    
-  belongs_to :project   
+# This file is a part of Redmine CRM (redmine_contacts) plugin,
+# customer relationship management plugin for Redmine
+#
+# Copyright (C) 2011-2013 Kirill Bezrukov
+# http://www.redminecrm.com/
+#
+# redmine_contacts is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# redmine_contacts is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
+
+class Deal < ActiveRecord::Base
+  unloadable
+
+  belongs_to :project
   belongs_to :author, :class_name => "User", :foreign_key => "author_id"
-  belongs_to :assigned_to, :class_name => 'User', :foreign_key => 'assigned_to_id'    
+  belongs_to :assigned_to, :class_name => 'User', :foreign_key => 'assigned_to_id'
   belongs_to :category, :class_name => 'DealCategory', :foreign_key => 'category_id'
-  belongs_to :contact  
-  belongs_to :status, :class_name => "DealStatus", :foreign_key => "status_id"  
+  belongs_to :contact
+  belongs_to :status, :class_name => "DealStatus", :foreign_key => "status_id"
   has_many :deals, :class_name => "deal", :foreign_key => "reference_id"
   has_many :notes, :as => :source, :class_name => 'DealNote', :dependent => :delete_all, :order => "created_on DESC"
   has_many :deal_processes, :dependent => :delete_all
@@ -158,7 +177,7 @@ class Deal < ActiveRecord::Base
     Money.from_float(self.price, self.currency).format rescue helpers.number_with_delimiter(price, :delimiter => ' ', :precision => 2)    
   end
 
-  def info  
+  def info
    result = ""
    result = self.status.name if self.status
    result = result + " - " + self.price_to_s unless self.price.blank?    
@@ -169,5 +188,5 @@ class Deal < ActiveRecord::Base
 
   def helpers
     ActionController::Base.helpers
-  end  
+  end
 end

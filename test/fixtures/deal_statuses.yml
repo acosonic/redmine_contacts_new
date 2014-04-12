@@ -1,7 +1,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 new:
-  id: 1 
-  name: Pending    
+  id: 1
+  name: Pending
   color: 11184810
   is_default: true
   status_type: 0
@@ -17,4 +17,3 @@ lost:
   color: 16711680
   is_default: false
   status_type: 2
-  

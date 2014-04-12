@@ -1,7 +1,7 @@
 <div id="deals">
 
 <div class="contextual">
-	<%= link_to_if_authorized l(:label_deal_new), {:controller => 'deals', :action => 'new', :project_id => @project, :contact_id => @contact} %>
+	<%= link_to_if_authorized l(:label_crm_deal_new), {:controller => 'deals', :action => 'new', :project_id => @project, :contact_id => @contact} %>
 </div>
 
 <h3><%= "#{l(:label_deal_plural)}" %> <%= " - #{deals_sum_to_currency(@deals.select{|d| d.open? && !d.price.blank?}.group_by(&:currency).map{|k, v| [k, v.sum(&:price)]})}".html_safe if @deals.detect{|d| d.open? && !d.price.blank?} %></h3>     

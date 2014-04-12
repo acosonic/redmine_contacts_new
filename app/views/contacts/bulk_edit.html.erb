@@ -42,14 +42,14 @@
 	<% end -%>
 
 	<p>
-		<label><%= l(:label_assigned_to) %></label> 
+		<label><%= l(:label_crm_assigned_to) %></label> 
 		<%= select_tag('contact[assigned_to_id]', content_tag('option', l(:label_no_change_option), :value => '') +
 	                                 content_tag('option', l(:label_nobody), :value => 'none') +
 	                                 options_from_collection_for_select(@assignables, :id, :name)) %>
 	</p>
 
 	<p>
-		<label><%= l(:label_contacts_visibility) %></label> 
+		<label><%= l(:label_crm_contacts_visibility) %></label> 
 		<%= select_tag 'contact[visibility]', options_for_select(collection_for_visibility_select) %>
 	</p> 
 

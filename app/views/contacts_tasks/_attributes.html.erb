@@ -3,16 +3,16 @@
   <%= label_tag 'task_subject',  l(:field_subject)%> <br>
   <%= ff.text_field :subject, :style => "width: 98%;" %>
 
-  <p>  
+  <p>
   <%= label_tag :assigned_to_id,  l(:field_assigned_to)%> <br>
   <%= ff.select :assigned_to_id,  @project.assignable_users.collect {|m| [m.name, m.id]}, :selected =>  User.current.id, :include_blank => true %>
-  </p>  
+  </p>
   <%= label_tag 'due_date',  l(:field_due_date)%> <br>
-  <%= ff.text_field :due_date, :value => Date.today, :size => 12 %><%= calendar_for('issue_due_date') %><br>   
+  <%= ff.text_field :due_date, :value => Date.today, :size => 12 %><%= calendar_for('issue_due_date') %><br>
 
-  <p> 
-  <%= label_tag :description,  l(:field_description)%> <br>      
-  <%= ff.text_area :description, :value => "", :rows => 6, :class => 'wiki-edit' , :style => "width: 98%;" %><br>      
+  <p>
+  <%= label_tag :description,  l(:field_description)%> <br>
+  <%= ff.text_area :description, :value => "", :rows => 6, :class => 'wiki-edit' , :style => "width: 98%;" %><br>
   </p>
 
   <% if @project.issue_categories.any? %>

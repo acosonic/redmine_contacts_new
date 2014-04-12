@@ -1,14 +1,33 @@
+# This file is a part of Redmine CRM (redmine_contacts) plugin,
+# customer relationship management plugin for Redmine
+#
+# Copyright (C) 2011-2013 Kirill Bezrukov
+# http://www.redminecrm.com/
+#
+# redmine_contacts is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# redmine_contacts is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
+
 class ContactsTasksController < ApplicationController
-  unloadable    
-  
-  before_filter :find_project_by_project_id, :except => [:close] 
+  unloadable
+
+  before_filter :find_project_by_project_id, :except => [:close]
   before_filter :find_issue, :except => [:new]
   before_filter :authorize_global, :only => [:close]
   before_filter :authorize, :only => [:add, :delete]
-  before_filter :find_contact, :except => [:add, :close]    
+  before_filter :find_contact, :except => [:add, :close]
 
   helper :contacts
-  
+
   def new
     deny_access unless @contact.editable? || User.current.allowed_to?(:add_issues, @project)
     issue = Issue.new
@@ -18,66 +37,66 @@ class ContactsTasksController < ApplicationController
     issue.start_date ||= Date.today
     issue.contacts << @contact
     issue.safe_attributes = params[:issue] if params[:issue]
-    
+
     if issue.save
       flash[:notice] = l(:notice_successful_add)
       redirect_to :back
     else
-      redirect_to :back 
-    end           
-  end   
-  
-  
-  def add    
-    @show_form = "true"    
+      redirect_to :back
+    end
+  end
 
-    if params[:contact_id] && request.post? then    
+
+  def add
+    @show_form = "true"
+
+    if params[:contact_id] && request.post? then
       find_contact
       @contact.issues << @issue
       @contact.save
     end
-    
+
     respond_to do |format|
-      format.html { redirect_to :back }  
+      format.html { redirect_to :back }
       format.js
     end
-  end  
+  end
 
-  def delete    
+  def delete
     @issue.contacts.delete(@contact)
     respond_to do |format|
       format.html { redirect_to :back }
       format.js
-    end    
+    end
   end
 
   def close
-    @issue.status = IssueStatus.find(:first, :conditions =>  { :is_closed => true })    
+    @issue.status = IssueStatus.find(:first, :conditions =>  { :is_closed => true })
     @issue.save
     respond_to do |format|
-      format.js   
+      format.js
       format.html {redirect_to :back }
     end
-    
-  end     
-  
+
+  end
+
   private
-  
-  def find_contact 
-    @contact = Contact.find(params[:contact_id]) 
+
+  def find_contact
+    @contact = Contact.find(params[:contact_id])
   rescue ActiveRecord::RecordNotFound
     render_404
   end
 
-  def find_issue 
-    @issue = Issue.find(params[:issue_id]) 
+  def find_issue
+    @issue = Issue.find(params[:issue_id])
     @project = @issue.project
   rescue ActiveRecord::RecordNotFound
     render_404
   end
-  
+
   def assigned_to_users
-    user_values = []  
+    user_values = []
     project = @project
     user_values << ["<< #{l(:label_all)} >>", ""]
     user_values << ["<< #{l(:label_me)} >>", User.current.id] if User.current.logged?
@@ -89,8 +108,8 @@ class ContactsTasksController < ApplicationController
         # members of the user's projects
         user_values += User.active.find(:all, :conditions => ["#{User.table_name}.id IN (SELECT DISTINCT user_id FROM members WHERE project_id IN (?))", project_ids]).sort.collect{|s| [s.name, s.id.to_s] }
       end
-    end    
+    end
   end
-  
-  
+
+
 end

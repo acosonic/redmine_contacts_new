@@ -1,9 +1,9 @@
 <div class="contextual">
-<%= link_to l(:label_deal_status_new), {:controller => "deal_statuses", :action => 'new'}, :class => 'icon icon-add' %>
+<%= link_to l(:label_crm_deal_status_new), {:controller => "deal_statuses", :action => 'new'}, :class => 'icon icon-add' %>
 </div>
 
-<h3><%=l(:label_deal_status_plural)%></h3>
- 
+<h3><%=l(:label_crm_deal_status_plural)%></h3>
+
 <table class="list">
   <thead><tr>
   <th><%=l(:field_status)%></th>
@@ -12,7 +12,7 @@
   <th><%=l(:button_sort)%></th>
   <th></th>
   </tr></thead>
-  <tbody>  
+  <tbody>
 <% for status in DealStatus.all( :order => "status_type, position")  %>
   <tr class="<%= cycle("odd", "even") %>">
   <td><span class="color" style="border: 1px solid #D7D7D7;background-color: <%= status.color_name %>;">&nbsp;&nbsp;&nbsp;&nbsp;</span> <%= link_to status.name, :controller => "deal_statuses", :action => 'edit', :id => status %></td>
@@ -26,5 +26,3 @@
 <% end %>
   </tbody>
 </table>
-
-

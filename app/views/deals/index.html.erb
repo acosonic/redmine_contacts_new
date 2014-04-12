@@ -13,8 +13,8 @@
 <% end %>
 
 <div class="contextual">
-  <%= link_to_if_authorized l(:label_deal_new), {:controller => 'deals', :action => 'new', :project_id => @project}, :class => 'icon icon-add' %>
-  <%= link_to_if_authorized l(:label_contacts_import), {:controller => 'deal_imports', :action => 'new', :project_id => @project}, :class => 'icon icon-import', :id => 'import_from_csv' %>
+  <%= link_to_if_authorized l(:label_crm_deal_new), {:controller => 'deals', :action => 'new', :project_id => @project}, :class => 'icon icon-add' %>
+  <%= link_to_if_authorized l(:label_crm_import), {:controller => 'deal_imports', :action => 'new', :project_id => @project}, :class => 'icon icon-import', :id => 'import_from_csv' %>
 </div>
 
 <div class="filters">   
@@ -28,7 +28,7 @@
 		</span>         
 
 	<span class="live_search">  
-		 	<%= text_field_tag(:search, params[:search], :autocomplete => "off", :class => "live_search_field", :placeholder => l(:label_contact_search) ) %>   
+		 	<%= text_field_tag(:search, params[:search], :autocomplete => "off", :class => "live_search_field", :placeholder => l(:label_crm_contact_search) ) %>   
 
         <script type="text/javascript">
            
@@ -58,22 +58,22 @@
 			<p>  
         <% if !deal_statuses.empty?  %>
         <span class="filter-condition">        
-					<%= label_tag l(:label_deal_status) + " "  %>
+					<%= label_tag l(:label_crm_deal_status) + " "  %>
 					<%= select_tag :status_id, options_for_select(collection_for_status_select.insert(0, [l(:label_open_issues), "o"]).insert(0, [l(:label_all), ""]), params[:status_id]) %>
         </span>
 				<% end %>
         <span class="filter-condition">        
-          <%= label_tag l(:label_created_on) + " "%>
+          <%= label_tag l(:label_crm_created_on) + " "%>
   				<%= select_tag 'period', options_for_period_select(params[:period]) %>
         </span>
         <% if @project && !@project.deal_categories.empty? %>
         <span class="filter-condition">        
-					<%= label_tag l(:label_deal_category) + " "%>
+					<%= label_tag l(:label_crm_deal_category) + " "%>
 					<%= select_tag 'category_id', options_for_select(@project.deal_categories.collect {|c| [c.name, c.id.to_s]}.insert(0, [""]), params[:category_id]) %>
         </span>
 				<% end %>	
         <span class="filter-condition">        
-				<%= label_tag l(:label_assigned_to) + " "  %> 
+				<%= label_tag l(:label_crm_assigned_to) + " "  %> 
 				<%= select_tag :assigned_to_id, options_for_select(Deal.available_users(@project).collect{|u| [u.name, u.id.to_s]}.insert(0, [""]),  params[:assigned_to_id]) %>
         </span>
         

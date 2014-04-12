@@ -2,7 +2,7 @@
 	<div id="deals_statistics">  
 		<% if !(@project && !authorize_for(:sales_funnel, :index)) %> 
 			<div class="contextual">
-				<%= link_to l(:label_sales_funnel), {:controller => 'sales_funnel', :action => 'index', :project_id => @project} %>
+				<%= link_to l(:label_crm_sales_funnel), {:controller => 'sales_funnel', :action => 'index', :project_id => @project} %>
 			</div>
 		<% end %>
 		<h3><%= l(:label_statistics) %></h3>

@@ -2,7 +2,7 @@
       'id' => contact.id,
       'label' => contact.name,
       'avatar' => avatar_to(contact, :size => 16),
-      'company' => contact.is_company ? "" : contact.company,
+      'company' => contact.is_company ? "" : contact.company.to_s,
       'email' => contact.primary_email,
       'value' => contact.id
       }

@@ -1,6 +1,6 @@
 div.contact {background:#f4e9f2; padding:6px; margin-bottom:6px;border: 1px solid #d7d7d7;}
 div.deal {background:#edfff2; padding:6px; margin-bottom:6px;border: 1px solid #d7d7d7;}
-form#add_task_form {background:#ffffff; display: block; padding:6px; margin-bottom:6px;border: 1px solid #d7d7d7; width: 92%;}     
+form#add_task_form {background:#ffffff; display: block; padding:6px; margin-bottom:6px;border: 1px solid #d7d7d7; width: 92%;}
 
 /********************/
 /* CONTACT ISSUES		*/
@@ -20,11 +20,11 @@ div.contact-issues  td.issue_subject {
   vertical-align: top;
   width: 100%;
 }
- 
+
 table.list.issue td.contacts img.gravatar{
   vertical-align: middle;
   margin: 0 4px 2px 0;
-} 
+}
 
 tr.issue td.contacts {
 	text-align: left;
@@ -41,7 +41,7 @@ div.contact-issues h3 a {
 
 div.add-note {margin-left: 5px;  margin-right: 6px; margin-bottom: 20px;}
 div.add-note p {margin-bottom: 0px; margin-top: 5px;}
-.note-custom-fields label {margin-right: 10px;}  
+.note-custom-fields label {margin-right: 10px;}
 
 /*div#contact_list table.index tbody tr:hover { background-color:#ffffdd; } */
 
@@ -71,50 +71,50 @@ div.contact.details table.subject_header h1 {
 }
 
 table.subject_header td.avatar {
-	vertical-align: top;  
+	vertical-align: top;
   vertical-align: top;
   text-align: right;
   width: 57px;
-} 
+}
 
 table.subject_header td.subject_info {
   padding-left: 15px;
   padding-right: 15px;
-  border-left: 1px solid #D7D7D7;   
-	min-width: 200px;     
-	width: 200px; 
+  border-left: 1px solid #D7D7D7;
+	min-width: 200px;
+	width: 200px;
 }
 
 table.subject_header td.subject_info ul {
-	list-style: none;    
+	list-style: none;
 	padding-left: 0px;
 }
 
 table.subject_header td.subject_info li {
   line-height: 20px;
   white-space: nowrap;
-}      
+}
 
-                           
+
 h4.contacts_header {border-bottom: 0px;}
 
 
 
 /********************/
 /*		Search		*/
-/********************/   
+/********************/
 h2.contacts_header {border-bottom: 0px;}
 
 
 div.filters h2 {margin-bottom: 5px;}
-div.filters h2 .scope_title a { color: #444; text-decoration: none; } 
+div.filters h2 .scope_title a { color: #444; text-decoration: none; }
 div.filters h2 .scope_title a:hover { text-decoration: none; display: inline; color: #aaa;}
 
-div.filters .tags span.tag a { line-height: 0; }
+div.filters .tags span.tag-label-color a { line-height: 0; }
 
 div.search_and_filters { margin-bottom: 10px; }
 
-div.live_search  { font-size: 16px; }    
+div.live_search  { font-size: 16px; }
 
 div.filters .live_search {position:relative;}
 
@@ -133,8 +133,9 @@ input#search:focus:-moz-placeholder {	color: lightgray;}
   display: inline-block;
 }
 
-span.tag, span.deal-status {
+span.tag-label-color {
   background-color: #759FCF;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 3px;
   padding: 2px 4px;
   display: inline-block;
@@ -142,28 +143,28 @@ span.tag, span.deal-status {
   margin: 0px 0px 5px 2px;
 }
 
-span.tag:hover, span.deal-status:hover {
+span.tag-label-color:hover {
   background-color: #9DB9D5;
 }
 
-span.tag a, span.deal-status a, span.deal-status > span {
+span.tag-label-color a, span.tag-label-color > span {
   text-decoration: none;
   font-family: Verdana, sans-serif;
   font-weight: normal;
-  color: white;  
+  color: white;
 }
 
 #edit_tags_form.box {
 	margin: 1px 5px 0px 0px;
-}      
+}
 
-#edit_tags_form.box label { 
-	margin-right: 5px;  
-	font-weight: bold;      
-}  
+#edit_tags_form.box label {
+	margin-right: 5px;
+	font-weight: bold;
+}
 
-#edit_tags_form.box #contact_tags { 
-	margin-bottom: 10px;  
+#edit_tags_form.box #contact_tags {
+	margin-bottom: 10px;
 }
 
 div#tags_data span.contextual {float: none; padding-left: 0px;}
@@ -285,31 +286,31 @@ table.contacts.index {
 	border-top: 1px solid rgb(239, 239, 239);
 	border-right: 1px solid rgb(239, 239, 239);
 	border-left: 1px solid rgb(239, 239, 239);
-	width: 100%; 
-	border-spacing: 0px 0px; 
-	margin-bottom: 4px; 
-}    
+	width: 100%;
+	border-spacing: 0px 0px;
+	margin-bottom: 4px;
+}
 
-table.contacts.index tr.selected{ background-color: #507AAA !important;	color: #F8F8F8 !important;} 
+table.contacts.index tr.selected{ background-color: #507AAA !important;	color: #F8F8F8 !important;}
 /*table.contacts.index tr.selected a { color: #F8F8F8 !important; } */
-table.contacts.index tr.context-menu-selection h2 { color: #F8F8F8 !important; } 
-table.contacts.index tr.context-menu-selection td { color: #F8F8F8 !important; } 
+table.contacts.index tr.context-menu-selection h2 { color: #F8F8F8 !important; }
+table.contacts.index tr.context-menu-selection td { color: #F8F8F8 !important; }
 
 table.contacts.index tr.context-menu-selection span.deal-status,
-table.contacts.index tr.context-menu-selection span.tag { border: 1px solid #EFEFEF; padding: 2px 3px; }
+table.contacts.index tr.context-menu-selection span.tag-label-color { border: 1px solid #EFEFEF; padding: 2px 3px; }
 
-table.contacts.index tbody tr:hover { background-color:#ffffdd; } 
+table.contacts.index tbody tr:hover { background-color:#ffffdd; }
 
 table.contacts.index td {
   vertical-align: top;
   color: #666;
   font-size: 12px;
   padding: 8px 0;
-  border-bottom: 1px solid #efefef; 
+  border-bottom: 1px solid #efefef;
 }
 
 table.contacts.index td.checkbox { padding: 12px 0px 0px 5px; }
-table.contacts.index td.name { width: 50%; padding-right: 10px;} 
+table.contacts.index td.name { width: 50%; padding-right: 10px;}
 table.contacts.index td.info { width: 50%; padding-right: 5px; }
 table.contacts.index td.avatar {padding: 10px 10px 10px 5px;}
 
@@ -325,7 +326,7 @@ table.contacts.deals.index td.avatar {padding: 10px 10px 10px 10px;}
 table.contacts.index td.name h1 {	font-size: 20px; font-weight: normal;
 	margin: 0;
 	padding: 0;
-}         
+}
 
 table.contacts.index td.name h1.deal_name {
 	font-size: 16px;
@@ -359,19 +360,19 @@ div.Right td.name div.info {
 
 div#deal-status {
 	margin-top: 4px;
-}     
+}
 
 div.deal-sum {
 	margin-bottom: 4px;
 }
 
-table.related_deals td.name h4 { letter-spacing: -1px; margin: 0px 0 4px 0; padding: 0; line-height: 1.1em;} 
+table.related_deals td.name h4 { letter-spacing: -1px; margin: 0px 0 4px 0; padding: 0; line-height: 1.1em;}
 
-div#deal-status span.contextual {float: none; padding-left: 0px;}   
+div#deal-status span.contextual {float: none; padding-left: 0px;}
 
 
 /**********************************************************************/
-/* DEAL LIST 
+/* DEAL LIST
 /**********************************************************************/
 
 .deal_list table.list  tr.deal a {color: #666;}
@@ -395,31 +396,31 @@ div#deal-status span.contextual {float: none; padding-left: 0px;}
 
 
 /**************************************************************/
-/* 		                  ICONS         
+/* 		                  ICONS
 /**************************************************************/
 
 #admin-menu a.contacts { background-image: url(../images/vcard.png);}
 
-.icon-contact { background-image:  url(../images/vcard.png); }    
-.icon-import { background-image:  url(../images/bullet_go.png); }    
-.icon-merge { background-image:  url(../images/arrow_merge.png); }    
+.icon-contact { background-image:  url(../images/vcard.png); }
+.icon-import { background-image:  url(../images/bullet_go.png); }
+.icon-merge { background-image:  url(../images/arrow_merge.png); }
 
-.icon-add-deal { background-image: url(../images/money.png); }  
-.icon-add-employee { background-image: url(../images/user_suit.png); }       
-.icon-link-break { background-image: url(../../../images/link_break.png); }  
-.icon-call { background-image: url(../images/phone.png); }  
-.icon-meeting { background-image: url(../images/calendar_view_day.png); }  
+.icon-add-deal { background-image: url(../images/money.png); }
+.icon-add-company-contact { background-image: url(../images/user_suit.png); }
+.icon-link-break { background-image: url(../../../images/link_break.png); }
+.icon-call { background-image: url(../images/phone.png); }
+.icon-meeting { background-image: url(../images/calendar_view_day.png); }
 .icon-vcard { background-image: url(../images/vcard.png); }
-.icon-phone { background-image: url(../images/telephone.png); }     
-.icon-email { background-image: url(../images/email.png); }     
+.icon-phone { background-image: url(../images/telephone.png); }
+.icon-email { background-image: url(../images/email.png); }
 
-.icon-money-dollar { background-image: url(../images/money_dollar.png); }  
+.icon-money-dollar { background-image: url(../images/money_dollar.png); }
 .icon-rosette { background-image: url(../images/rosette.png); }
 .icon-date { background-image: url(../images/date.png); }
 .icon-clock-red { background-image: url(../images/clock_red.png); }
-.icon-money-euro { background-image: url(../images/money_euro.png); }  
-.icon-money-pound { background-image: url(../images/money_pound.png); }  
-.icon-money-yen { background-image: url(../images/money_yen.png); }  
+.icon-money-euro { background-image: url(../images/money_euro.png); }
+.icon-money-pound { background-image: url(../images/money_pound.png); }
+.icon-money-yen { background-image: url(../images/money_yen.png); }
 
 /**************************************************************/
 /*                   CONTACT_CARD																*/
@@ -466,19 +467,19 @@ div.wiki img.tumbnail {
 	height: 150px;
 	padding: 4px;
 	vertical-align: middle;
-	width: 150px;  
-	background: white;        
-}                   
+	width: 150px;
+	background: white;
+}
 
 /**************************************************************/
 /*                   EMPLOYEE                                */
 /**************************************************************/
-#employee table.note_data {
+#company_contacts table.note_data {
   width: 250px;
   float: left;
 }
 
-#employee table.note_data td.name {
+#company_contacts table.note_data td.name {
   width: auto;
 }
 
@@ -491,7 +492,7 @@ table.note_data, table.related_deals {
 }
 
 table.note_data td.name div.wiki {
-	margin: 5px 0px 0px 0px;     
+	margin: 5px 0px 0px 0px;
 }
 
 table.note_data .wiki.note p {
@@ -503,14 +504,14 @@ table.note_data .wiki.note div.attachments p {
 	display: inline-block;
 	white-space: nowrap;
 }
-  
-table.note_data td.avatar {            
-	padding-right: 4px;  
+
+table.note_data td.avatar {
+	padding-right: 4px;
 	padding-left: 0px;
 }
 
 table.note_data td.name {
-	padding-left: 0px;  
+	padding-left: 0px;
 	vertical-align: top;
 	width: 100%;
 }
@@ -522,33 +523,33 @@ table.note_data .content.preview {
   font-style: italic;
 }
 
-table.note_data a.delete:hover {opacity: 1;}  
-table.note_data a.delete {opacity: 0.4;}  
+table.note_data a.delete:hover {opacity: 1;}
+table.note_data a.delete {opacity: 0.4;}
 
 table.note_data td.name h4 {
 	letter-spacing: -1px;
 	margin: 7px 0 0 0;
 	padding: 0;
-	line-height: 1.1em;    
+	line-height: 1.1em;
 }
 table.note_data h4 { margin-top: 5px; margin-bottom: 0px;}
-table.note_data td.avatar { vertical-align: top; width: 38px; padding-top: 10px;}    
+table.note_data td.avatar { vertical-align: top; width: 38px; padding-top: 10px;}
 
-table.note_data:hover h4>a.wiki-anchor { display: inline; color: #ddd;} 
+table.note_data:hover h4>a.wiki-anchor { display: inline; color: #ddd;}
 
 .wiki.note a.wiki-anchor {display: none;}
 
 div.note_data_header table.note_data { margin-bottom: 5px;}
 
-h2.note_title { margin-bottom: 0px;}     
+h2.note_title { margin-bottom: 0px;}
 
-/*     Thumbnails    	*/       
+/*     Thumbnails    	*/
 
 div.wiki p.thumbnails {margin-top: 12px;}
 
 img.thumbnail {
   border: 1px solid #D7D7D7;
-  padding: 4px; 
+  padding: 4px;
   margin: 4px;
   vertical-align: middle;
 }
@@ -559,9 +560,9 @@ img.thumbnail {
 
 #duplicates ul {margin: 0;  padding: 0;}
 #duplicates li {list-style-type:none; margin: 0px 2px 0px 0px; padding: 0px 0px 0px 0px;}
-#duplicates img.gravatar {vertical-align: middle; margin: 0 4px 2px 0;}  
+#duplicates img.gravatar {vertical-align: middle; margin: 0 4px 2px 0;}
 
-#duplicates ul.box {padding: 10px; background-color: #FFEBC1;} 
+#duplicates ul.box {padding: 10px; background-color: #FFEBC1;}
 
 
 /**************************************************************/
@@ -581,17 +582,17 @@ img.thumbnail {
 /**************************************************************/
 
 table.sales-funnel td.sales-funnel {text-align: center;}
-table.sales-funnel td.sales-funnel span.deal-status { display: block; margin: auto;}
-table.sales-funnel td.sales-funnel.index_1 span.deal-status { width: 200px;}
-table.sales-funnel td.sales-funnel.index_2 span.deal-status { width: 180px;}
-table.sales-funnel td.sales-funnel.index_3 span.deal-status { width: 160px;}
-table.sales-funnel td.sales-funnel.index_4 span.deal-status { width: 140px;}
-table.sales-funnel td.sales-funnel.index_5 span.deal-status { width: 120px;}
-table.sales-funnel td.sales-funnel.index_6 span.deal-status { width: 100px;}
-table.sales-funnel td.sales-funnel.index_7 span.deal-status { width: 80px;}
-table.sales-funnel td.sales-funnel.index_8 span.deal-status { width: 60px;}
-table.sales-funnel td.sales-funnel.index_9 span.deal-status { width: 40px;}
-table.sales-funnel td.sales-funnel.index_10 span.deal-status { width: 20px;}
+table.sales-funnel td.sales-funnel span.tag-label-color { display: block; margin: auto;}
+table.sales-funnel td.sales-funnel.index_1 span.tag-label-color { width: 200px;}
+table.sales-funnel td.sales-funnel.index_2 span.tag-label-color { width: 180px;}
+table.sales-funnel td.sales-funnel.index_3 span.tag-label-color { width: 160px;}
+table.sales-funnel td.sales-funnel.index_4 span.tag-label-color { width: 140px;}
+table.sales-funnel td.sales-funnel.index_5 span.tag-label-color { width: 120px;}
+table.sales-funnel td.sales-funnel.index_6 span.tag-label-color { width: 100px;}
+table.sales-funnel td.sales-funnel.index_7 span.tag-label-color { width: 80px;}
+table.sales-funnel td.sales-funnel.index_8 span.tag-label-color { width: 60px;}
+table.sales-funnel td.sales-funnel.index_9 span.tag-label-color { width: 40px;}
+table.sales-funnel td.sales-funnel.index_10 span.tag-label-color { width: 20px;}
 table.sales-funnel td.count { text-align: center; }
 table.sales-funnel td.total { text-align: right; }
 table.sales-funnel tr.deal_status_type-1 { background-color: #ECFFF5; }

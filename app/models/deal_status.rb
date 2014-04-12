@@ -1,6 +1,25 @@
+# This file is a part of Redmine CRM (redmine_contacts) plugin,
+# customer relationship management plugin for Redmine
+#
+# Copyright (C) 2011-2013 Kirill Bezrukov
+# http://www.redminecrm.com/
+#
+# redmine_contacts is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# redmine_contacts is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
+
 class DealStatus < ActiveRecord::Base
   unloadable
-  
+
   OPEN_STATUS = 0
   WON_STATUS = 1
   LOST_STATUS = 2
@@ -67,8 +86,8 @@ class DealStatus < ActiveRecord::Base
   def status_type_name
     case self.status_type 
       when OPEN_STATUS then l(:label_open_issues)
-      when WON_STATUS then l(:label_deal_status_won)
-      when LOST_STATUS then l(:label_deal_status_lost)
+      when WON_STATUS then l(:label_crm_deal_status_won)
+      when LOST_STATUS then l(:label_crm_deal_status_lost)
       else ""
     end
   end

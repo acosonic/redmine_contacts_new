@@ -1,3 +1,24 @@
+# encoding: utf-8
+#
+# This file is a part of Redmine CRM (redmine_contacts) plugin,
+# customer relationship management plugin for Redmine
+#
+# Copyright (C) 2011-2013 Kirill Bezrukov
+# http://www.redminecrm.com/
+#
+# redmine_contacts is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# redmine_contacts is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
+
 require File.expand_path('../../test_helper', __FILE__)
 
 class AutoCompletesControllerTest < ActionController::TestCase
@@ -12,7 +33,7 @@ class AutoCompletesControllerTest < ActionController::TestCase
            :workflows,
            :journals, :journal_details
 
-    ActiveRecord::Fixtures.create_fixtures(File.dirname(__FILE__) + '/../fixtures/', 
+    ActiveRecord::Fixtures.create_fixtures(File.dirname(__FILE__) + '/../fixtures/',
                             [:contacts,
                              :contacts_projects,
                              :contacts_issues,
@@ -22,7 +43,7 @@ class AutoCompletesControllerTest < ActionController::TestCase
                              :enabled_modules,
                              :tags,
                              :taggings,
-                             :contacts_queries])   
+                             :contacts_queries])
   def setup
     RedmineContacts::TestCase.prepare
 
@@ -30,7 +51,7 @@ class AutoCompletesControllerTest < ActionController::TestCase
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     @request.session[:user_id] = 1
-  end    
+  end
 
   def test_contacts_should_not_be_case_sensitive
     get :contacts, :project_id => 'ecookbook', :q => 'ma'
@@ -51,14 +72,14 @@ class AutoCompletesControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil assigns(:companies)
     assert assigns(:companies).detect {|contact| contact.name.match /Domoway/}
-  end  
+  end
 
   def test_contacts_should_return_json
     get :contacts, :project_id => 'ecookbook', :q => 'marat'
     assert_response :success
     json = ActiveSupport::JSON.decode(response.body)
     assert_kind_of Array, json
-    contact = json.first
+    contact = json.last
     assert_kind_of Hash, contact
     assert_equal 2, contact['id']
     assert_equal 2, contact['value']

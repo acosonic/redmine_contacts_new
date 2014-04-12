@@ -1,4 +1,4 @@
-<h3><%= l(:label_deal_category_plural) %></h3> 
+<h3><%= l(:label_crm_deal_category_plural) %></h3>
 
 <% if @project.deal_categories.any? %>
 <table class="list">
@@ -23,6 +23,6 @@
 <p class="nodata"><%= l(:label_no_data) %></p>
 <% end %>
 
-<p><%= link_to_if_authorized l(:label_deal_category_new), :controller => 'deal_categories', :action => 'new', :project_id => @project %></p>
+<p><%= link_to_if_authorized l(:label_crm_deal_category_new), :controller => 'deal_categories', :action => 'new', :project_id => @project %></p>
 
 <%= render :partial => "projects/deal_statuses" %>

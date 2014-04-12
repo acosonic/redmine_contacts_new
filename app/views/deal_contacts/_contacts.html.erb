@@ -9,7 +9,7 @@
 			:remote => true if User.current.allowed_to?({:controller => 'deal_contacts', :action => 'add'}, @project) %>
 	</div>
 
-	<h3><%= l(:label_contractor_plural) %></h3>   
+	<h3><%= l(:label_crm_contractor_plural) %></h3>   
 
 	<% unless !(@show_form == "true") %>
 	 	<%= form_tag({:controller => 'deal_contacts',

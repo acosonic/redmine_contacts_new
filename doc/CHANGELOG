@@ -1,8 +1,37 @@
 == Redmine CRM plugin changelog
 
-Redmine CRM plugin - customer retaionship management plugin for redmine
+Redmine CRM plugin - customer relationship management plugin for redmine
 Copyright (C) 2011-2013 Kirill Bezrukov
 http://www.redminecrm.com/
+
+== 2013-10-22 v3.2.7
+
+* Structured address for contacts
+
+== 2013-09-30 v3.2.6
+
+* Merging tags
+* New tags styles for redmine_tags plugin support
+* Deals probability and close_date in excerpt list
+
+== 2013-09-20 v3.2.5
+
+* Deals as a separate project module
+* Fixed employees and employees notes security issues
+* Send attachments to contact fixes
+* Deals tab always present for projects with deals module
+* Autocomplete for issues and deals contacts selection
+* Support for contacts_google_sync plugin
+* Czech translation fixes (Martin Štorkán)
+* vCard export limit takes from issues export limit
+* Fixed permission check for add and delete contact to project
+* Contact avatar as deal logo
+
+== 2013-07-02 v3.2.4
+
+* Ruby 2.0.0 support (vpim gem changed to vcard)
+* Fixed bug with bulk update
+* REST API for notes
 
 == 2013-04-25 v3.2.3
 
@@ -38,7 +67,7 @@ http://www.redminecrm.com/
 
 == 2013-03-18 v3.2.0
 
-* Show deal status workflow 
+* Show deal status workflow
 * Deals probability and due date
 * Deal status open, won, lost types
 * Export deals to CSV

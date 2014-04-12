@@ -1,3 +1,22 @@
+# This file is a part of Redmine CRM (redmine_contacts) plugin,
+# customer relationship management plugin for Redmine
+#
+# Copyright (C) 2011-2013 Kirill Bezrukov
+# http://www.redminecrm.com/
+#
+# redmine_contacts is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# redmine_contacts is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
+
 class ContactsController < ApplicationController
   unloadable
 
@@ -39,7 +58,7 @@ class ContactsController < ApplicationController
 
     if @query.valid?
       case params[:format]
-      when 'csv', 'pdf', 'xls'
+      when 'csv', 'pdf', 'xls', 'vcf'
         @limit = Setting.issues_export_limit.to_i
       when 'atom'
         @limit = Setting.feeds_limit.to_i
@@ -93,9 +112,9 @@ class ContactsController < ApplicationController
     @contact_issues_count = scope.visible.count
     @contact_issues = scope.visible.find(:all, :order => "#{Issue.table_name}.status_id, #{Issue.table_name}.updated_on DESC", :limit => 10)
     @deals = @contact.all_visible_deals
-    @employees = @contact.employees
+    @company_contacts = @contact.company_contacts.visible
 
-    source_id_cond = @contact.is_company ? Contact.order_by_name.find_all_by_company(@contact.first_name).map(&:id) << @contact.id : @contact.id
+    source_id_cond = @contact.is_company ? Contact.visible.order_by_name.select(:id).find_all_by_company(@contact.first_name) << @contact.id : @contact.id
     @note = Note.new(:created_on => Time.now)
     @notes_pages, @notes = paginate :notes,
                                     :per_page => 30,
@@ -108,7 +127,7 @@ class ContactsController < ApplicationController
       format.js if request.xhr?
       format.html { @contact.viewed }
       format.api
-      format.atom { render_feed(@notes, :title => "#{@contact.name || Setting.app_title}: #{l(:label_note_plural)}")  }
+      format.atom { render_feed(@notes, :title => "#{@contact.name || Setting.app_title}: #{l(:label_crm_note_plural)}")  }
       format.vcf { send_data(contact_to_vcard(@contact), :filename => "#{@contact.name}.vcf", :type => 'text/x-vcard;', :disposition => 'attachment') }
     end
   end
@@ -124,7 +143,7 @@ class ContactsController < ApplicationController
       attach_avatar
       respond_to do |format|
         format.html { redirect_to :action => "show", :project_id => params[:project_id], :id => @contact }
-        format.api  { head :ok }
+        format.api  { render_api_ok }
       end
     else
       respond_to do |format|
@@ -140,7 +159,10 @@ class ContactsController < ApplicationController
     else
       flash[:error] = l(:notice_unsuccessful_save)
     end
-    redirect_to :action => "index", :project_id => params[:project_id]
+    respond_to do |format|
+      format.html { redirect_back_or_default :action => "index", :project_id => params[:project_id] }
+      format.api  { render_api_ok }
+    end
   end
 
   def new
@@ -158,15 +180,9 @@ class ContactsController < ApplicationController
       flash[:notice] = l(:notice_successful_create)
       attach_avatar
       respond_to do |format|
-        format.html {
-          if params[:continue].present?
-            redirect_to :action => :new, :project_id => @project, :back_url => params[:back_url]
-          else
-            redirect_back_or_default :action => :show, :project_id => @project, :id => @contact
-          end
-        }
+        format.html { redirect_to (params[:continue] ?  {:action => "new", :project_id => @project} : {:action => "show", :project_id => @project, :id => @contact} )}
         format.js
-        format.api  { render :action => :show, :status => :created, :location => contact_url(@contact) }
+        format.api  { render :action => 'show', :status => :created, :location => contact_url(@contact) }
       end
     else
       respond_to do |format|
@@ -212,7 +228,7 @@ class ContactsController < ApplicationController
       format.html { render :partial => "notes/notes_list", :layout => false, :locals => {:notes => @notes, :notes_pages => @notes_pages} if request.xhr?}
       format.xml { render :xml => @notes }
       format.csv { send_data(notes_to_csv(@notes), :type => 'text/csv; header=present', :filename => 'notes.csv') }
-      format.atom { render_feed(@notes, :title => "#{l(:label_note_plural)}")  }
+      format.atom { render_feed(@notes, :title => "#{l(:label_crm_note_plural)}")  }
     end
   end
 

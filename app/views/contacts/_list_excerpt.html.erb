@@ -1,11 +1,11 @@
-<%= form_tag({}) do %>  
-<%= hidden_field_tag 'back_url', url_for(params) %>  
-<%= hidden_field_tag 'project_id', @project.id if @project %> 
+<%= form_tag({}) do %>
+<%= hidden_field_tag 'back_url', url_for(params) %>
+<%= hidden_field_tag 'project_id', @project.id if @project %>
 <div class="autoscroll">
     <table class="contacts index">
     <tbody>
-    <% previous_group = false %>    
-    <% @contacts.each do |contact| %>  
+    <% previous_group = false %>
+    <% @contacts.each do |contact| %>
         <% if @query.grouped? && (group = @query.group_by_column.value(contact)) != previous_group %>
           <% reset_cycle %>
           <tr class="group open">
@@ -28,17 +28,17 @@
             <td class="name">
                 <h1><%= link_to contact.name, contact_path(contact, :project_id => @project) %></h1>
                 <h2>
-                    <%= link_to h(contact.website), contact.website_address, :only_path => true unless !contact.is_company %>
+                    <%= link_to contact.website, contact.website_address, :class => 'external', :only_path => true unless !contact.is_company %>
                     <%= mail_to contact.emails.first unless contact.is_company%>
                     <div><%= contact.phones.first %></div>
                 </h2>
             </td>
             <td class="info">
                 <div class="title_and_company" >
-                    <%= h contact.job_title %>
+                    <%= contact.job_title %>
                     <% if !contact.is_company %>
-                        <%= " #{l(:label_at_company)} " unless (contact.job_title.blank? or contact.company.blank?) %> 
-                        <%= h contact.company %> 
+                        <%= " #{l(:label_crm_at_company)} " unless (contact.job_title.blank? or contact.company.blank?) %>
+                        <%= contact.company %>
                     <% end %>
                 </div>
                 <div class="tags">
@@ -46,13 +46,12 @@
                     <%# tag_links(ActsAsTaggableOn::TagList.from(contact.cached_tag_list)) %>
                 </div>
             </td>
-        </tr>         
+        </tr>
     <% end %>
     </tbody>
-    </table> 
- </div> 
+    </table>
+ </div>
  <% end %>
 
 
 <p class="pagination"><%= pagination_links_full @contacts_pages, @contacts_count %></p>
-

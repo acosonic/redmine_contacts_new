@@ -1,4 +1,4 @@
-<h2><%= h l(:label_sales_funnel) %></h2>
+<h2><%= h l(:label_crm_sales_funnel) %></h2>
 
 <div class="filters">   
 	<%= form_tag({ :controller => 'sales_funnel', :action => 'index', :project_id => @project }, :method => :get, :id => "query_form") do %> 
@@ -10,15 +10,15 @@
 		<div style="<%= 'display: none;' if no_filters %>">  
 			<p>
 
-        <%= label_tag l(:label_period) + " "%>
+        <%= label_tag l(:label_crm_period) + " "%>
 				<%= select_tag 'period', options_for_period_select(params[:period]) %>
 
         <% if @project && !@project.deal_categories.empty? %>
-					<%= label_tag l(:label_deal_category) + " "%>
+					<%= label_tag l(:label_crm_deal_category) + " "%>
 					<%= select_tag 'category_id', options_for_select(@project.deal_categories.collect {|c| [c.name, c.id]}.insert(0, [""]), params[:category_id]) %>
 				<% end %>	
 
-				<%= label_tag l(:label_assigned_to) + " "  %> 
+				<%= label_tag l(:label_crm_assigned_to) + " "  %> 
 				<%= select_tag :assigned_to_id, options_for_select(Deal.available_users(@project).collect{|u| [u.name, u.id]}.insert(0, [""]),  params[:assigned_to_id]) %>
 
 				<% if @project %>

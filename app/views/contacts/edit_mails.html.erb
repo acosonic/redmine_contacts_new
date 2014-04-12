@@ -22,17 +22,17 @@
 	<p>
 		<label><%= l(:field_mail_from) %></label>
 		<%= text_field_tag('from', User.current.mail, :size => 30) %>
-		<%= link_to "#{l(:label_contacts_cc)}/#{l(:label_contacts_bcc)}", '#' , :onclick => "$('#mail_cc').show();$(this).hide();" %>
+		<%= link_to "#{l(:label_crm_contacts_cc)}/#{l(:label_crm_contacts_bcc)}", '#' , :onclick => "$('#mail_cc').show();$(this).hide();" %>
 	</p>
 
 <span id="mail_cc" style="display:none;">
   <p>
-    <label><%= l(:label_contacts_cc) %></label>
+    <label><%= l(:label_crm_contacts_cc) %></label>
     <%= text_field_tag('cc', '', :style => "width: 98%;") %>
   </p>
 
   <p>
-    <label><%= l(:label_contacts_bcc) %></label>
+    <label><%= l(:label_crm_contacts_bcc) %></label>
     <%= text_field_tag('bcc', '', :style => "width: 98%;") %>
   </p>
 </span>

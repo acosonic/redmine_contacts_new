@@ -4,7 +4,7 @@
 	</span>
 	<% if editable && authorize_for('contacts', 'update') %>
 	<span class="contextual">
-		<%= link_to l(:label_edit_tags), {}, :onclick => "$('#edit_tags_form').show(); $('#tags_data').hide();  return false;", :id => 'edit_tags_link' %>
+		<%= link_to l(:label_crm_edit_tags), {}, :onclick => "$('#edit_tags_form').show(); $('#tags_data').hide();  return false;", :id => 'edit_tags_link' %>
 	</span>
 	<% end %>
 </div>

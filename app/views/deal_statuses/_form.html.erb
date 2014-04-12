@@ -22,7 +22,7 @@
 </script>
 
 <p><label for="deal_status_status_type"><%=l(:label_crm_deal_status_type)%></label>
-<%= select_tag 'deal_status[status_type]', options_for_select([[l(:label_open_issues), DealStatus::OPEN_STATUS], [l(:label_deal_status_won), DealStatus::WON_STATUS], [l(:label_deal_status_lost), DealStatus::LOST_STATUS]], @deal_status.status_type) %>
+<%= select_tag 'deal_status[status_type]', options_for_select([[l(:label_open_issues), DealStatus::OPEN_STATUS], [l(:label_crm_deal_status_won), DealStatus::WON_STATUS], [l(:label_crm_deal_status_lost), DealStatus::LOST_STATUS]], @deal_status.status_type) %>
 
 <p><label for="deal_status_is_default"><%=l(:field_is_default)%></label>
 <%= check_box 'deal_status', 'is_default' %></p>

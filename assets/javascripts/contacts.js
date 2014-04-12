@@ -36,7 +36,7 @@ function toggleContact(event, element)
 		if (element.checked) {
 			checkAllContacts($$('.contacts.index td.checkbox input'));
 		}
-		else 
+		else
 		{
 			uncheckAllContacts($$('.contacts.index td.checkbox input'));
 		}
@@ -45,7 +45,7 @@ function toggleContact(event, element)
 	{
 		Element.up(element, 'tr').toggleClassName('context-menu-selection');
 	}
-}  
+}
 
 
 // Observ field function

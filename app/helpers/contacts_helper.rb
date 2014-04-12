@@ -1,36 +1,56 @@
 # encoding: utf-8
+#
+# This file is a part of Redmine CRM (redmine_contacts) plugin,
+# customer relationship management plugin for Redmine
+#
+# Copyright (C) 2011-2013 Kirill Bezrukov
+# http://www.redminecrm.com/
+#
+# redmine_contacts is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# redmine_contacts is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
+
 module ContactsHelper
 
   def contact_tabs(contact)
     contact_tabs = []
-    contact_tabs << {:name => 'notes', :partial => 'contacts/notes', :label => l(:label_note_plural)} if User.current.allowed_to?(:view_contacts, @project)
-    contact_tabs << {:name => 'employees', :partial => 'employees', :label => l(:label_company_employees) + (contact.employees.count > 0 ? " (#{contact.employees.count})" : "")} if contact.is_company?
+    contact_tabs << {:name => 'notes', :partial => 'contacts/notes', :label => l(:label_crm_note_plural)} if User.current.allowed_to?(:view_contacts, @project)
+    contact_tabs << {:name => 'contacts', :partial => 'company_contacts', :label => l(:label_contact_plural) + (contact.company_contacts.visible.count > 0 ? " (#{contact.company_contacts.count})" : "")} if contact.is_company?
     contact_tabs << {:name => 'deals', :partial => 'deals/related_deals', :label => l(:label_deal_plural) + (contact.all_visible_deals.size > 0 ? " (#{contact.all_visible_deals.size})" : "") } if User.current.allowed_to?(:view_deals, @project)
     contact_tabs
   end
 
   def collection_for_visibility_select
-    [[l(:label_contacts_visibility_project), Contact::VISIBILITY_PROJECT],
-     [l(:label_contacts_visibility_public), Contact::VISIBILITY_PUBLIC],
-     [l(:label_contacts_visibility_private), Contact::VISIBILITY_PRIVATE]]
+    [[l(:label_crm_contacts_visibility_project), Contact::VISIBILITY_PROJECT],
+     [l(:label_crm_contacts_visibility_public), Contact::VISIBILITY_PUBLIC],
+     [l(:label_crm_contacts_visibility_private), Contact::VISIBILITY_PRIVATE]]
   end
-  
-  def tag_url(tag_name, options={})
+
+  def contact_tag_url(tag_name, options={})
     {:controller => 'contacts',
-     :action => 'index', 
-     :set_filter => 1, 
+     :action => 'index',
+     :set_filter => 1,
      :project_id => @project,
-     :fields => [:tags], 
+     :fields => [:tags],
      :values => {:tags => [tag_name]},
-     :operators => {:tags => '='}}.merge(options)   
+     :operators => {:tags => '='}}.merge(options)
   end
 
   def tag_link(tag_name, options={})
     style = RedmineContacts.settings[:monochrome_tags].to_i > 0 ? {} : {:style => "background-color: #{tag_color(tag_name)}"}
     tag_count = options.delete(:count)
     tag_title = tag_count ? "#{tag_name} (#{tag_count})" : tag_name
-    link = link_to tag_title, tag_url(tag_name), options
-    content_tag(:span, link, {:class => "tag"}.merge(style))
+    link = link_to tag_title, contact_tag_url(tag_name), options
+    content_tag(:span, link, {:class => "tag-label-color"}.merge(style))
   end
 
   def tag_color(tag_name)
@@ -41,21 +61,21 @@ module ContactsHelper
 
   def tag_links(tag_list, options={})
     content_tag(
-              :span, 
+              :span,
               tag_list.map{|tag| tag_link(tag, options)}.join(' ').html_safe,
               :class => "tag_list") if tag_list
   end
 
   def authorized_for_permission?(permission, project, global = false)
     User.current.allowed_to?(permission, project, :global => global)
-  end  
-  
+  end
+
   def skype_to(skype_name, name = nil)
     return link_to skype_name, 'skype:' + skype_name + '?call' unless skype_name.blank?
   end
-  
+
   def contacts_for_select(project, options = {})
-    scope = Contact.scoped({}) 
+    scope = Contact.scoped({})
     scope = scope.scoped.limit(options[:limit] || 500)
     scope = scope.scoped.companies if options.delete(:is_company)
     scope = scope.joins(:projects).uniq.where(Contact.visible_condition(User.current))
@@ -74,13 +94,13 @@ module ContactsHelper
     polymorphic_path(note_source, options.merge(:project_id => @project))
     # return {:controller => note_source.class.name.pluralize.downcase, :action => 'show', :project_id => @project, :id => note_source.id }
   end
-       
-  def link_to_source(note_source, options={}) 
-    return link_to note_source.name, note_source_url(note_source, options) 
+
+  def link_to_source(note_source, options={})
+    return link_to note_source.name, note_source_url(note_source, options)
   end
 
   def select_contact_tag(name, contact, options={})
-    cross_project_contacts = !!options.delete(:cross_project_contacts) 
+    cross_project_contacts = !!options.delete(:cross_project_contacts)
     field_id = sanitize_to_id(name)
     is_select = !!options[:is_select]
     display_field = !!options[:display_field]
@@ -91,16 +111,16 @@ module ContactsHelper
     s = ""
     if is_select
       s << select_tag(name, options_for_select(contacts_for_select(cross_project_contacts ? nil : @project, :is_company => is_company), contact.try(:id)), :include_blank => include_blank)
-    else 
-      s << autocomplete_contact_tag(name, contact, options.merge(:project_id => cross_project_contacts ? nil : @project)) 
-    end  
+    else
+      s << autocomplete_contact_tag(name, contact, options.merge(:project_id => cross_project_contacts ? nil : @project))
+    end
 
     if add_contact
       s << link_to(image_tag('add.png', :style => 'vertical-align: middle;'),
                 new_project_contact_path(@project, :contact_field_name => name, :contacts_is_company => is_company),
                 :remote => true,
                 :method => 'get',
-                :title => l(:label_contact_new),
+                :title => l(:label_crm_contact_new),
                 :id => "#{field_id}_add_link",
                 :style => (display_field || is_select) ? "" : "display: none;",
                 :tabindex => 200) if authorize_for('contacts', 'new')
@@ -116,11 +136,11 @@ module ContactsHelper
     link_id = field_id + '_edit_link'
     s = ""
     s << content_tag(:span, contact.to_s, :id => span_id)
-    s << link_to(image_tag("edit.png", :alt => l(:label_edit), :style => "vertical-align:middle;"), "#", 
+    s << link_to(image_tag("edit.png", :alt => l(:label_edit), :style => "vertical-align:middle;"), "#",
             :onclick => "$('##{span_id}').hide(); $(this).hide(); $('##{field_id}_add_link').show(); $('##{field_id}').show(); $('##{field_id}').val(''); return false;",
             :id => link_id,
             :style => display_field ? "display: none;" : "")
-    s << text_field_tag(name, contact.blank? ? '' : contact.id, :style => display_field ? "" : "display: none;", :placeholder => l(:label_contact_search), :id =>  field_id, :class => "autocomplete") 
+    s << text_field_tag(name, contact.blank? ? '' : contact.id, :style => display_field ? "" : "display: none;", :placeholder => l(:label_crm_contact_search), :id =>  field_id, :class => "autocomplete")
     s << javascript_tag("$(document).ready(function() {
                             function #{field_id}_contact( message ) {
                                 $('##{span_id}').text( message );
@@ -144,10 +164,10 @@ module ContactsHelper
                               return $('<li>')
                                 .append('<a>' + item.avatar + '&nbsp;' + item.label + (item.company.length != 0 ? ' (' + item.company + ') ' : '') + '</a>')
                                 .appendTo( ul );
-                            };                            
+                            };
 
-                           $('##{field_id}').bind('click', function(){ 
-                                $(this).autocomplete('search', ''); 
+                           $('##{field_id}').bind('click', function(){
+                                $(this).autocomplete('search', '');
                            });
 
                           });")
@@ -155,7 +175,7 @@ module ContactsHelper
     s.html_safe
   end
 
-  def avatar_to(obj, options = { })  
+  def avatar_to(obj, options = { })
     # "https://avt.appsmail.ru/mail/sin23matvey/_avatar"
 
     options[:size] ||= "64"
@@ -168,23 +188,28 @@ module ContactsHelper
     # return image_tag(obj_icon, options.merge({:plugin => "redmine_contacts"})) if Rails::env == "development"
 
     if obj.is_a?(Deal)
-      image_tag(obj_icon, options.merge({:plugin => "redmine_contacts"}))
+      # image_tag(obj_icon, options.merge({:plugin => "redmine_contacts"}))
+      if obj.contact
+        avatar_to(obj.contact, options)
+      else
+        image_tag(obj_icon, options.merge({:plugin => "redmine_contacts"}))
+      end
     elsif obj.is_a?(Contact) && (avatar = obj.avatar) && avatar.readable?
       avatar_url = url_for :controller => "attachments", :action => "contacts_thumbnail", :id => avatar, :size => options[:size]
       if options[:full_size]
         link_to(image_tag(avatar_url, options), :controller => 'attachments', :action => 'download', :id => avatar, :filename => avatar.filename)
       else
         image_tag(avatar_url, options)
-      end  
+      end
     elsif obj.respond_to?(:facebook) &&  !obj.facebook.blank?
       image_tag("https://graph.facebook.com/#{obj.facebook.gsub('.*facebook.com\/','')}/picture?type=square#{'&return_ssl_resources=1' if (request && request.ssl?)}", options)
-    elsif obj.is_a?(Contact) && obj.primary_email && obj.primary_email =~ %r{^(.*)@mail.ru$}  
+    elsif obj.is_a?(Contact) && obj.primary_email && obj.primary_email =~ %r{^(.*)@mail.ru$}
       image_tag("http#{'s' if (request && request.ssl?)}://avt.appsmail.ru/mail/#{$1}/_avatar", options)
     elsif obj.respond_to?(:twitter) &&  !obj.twitter.blank?
       image_tag("https://api.twitter.com/1/users/profile_image?screen_name=#{obj.twitter}&size=bigger", options)
-    elsif Setting.gravatar_enabled? && obj.is_a?(Contact) && obj.primary_email 
+    elsif Setting.gravatar_enabled? && obj.is_a?(Contact) && obj.primary_email
       # options.merge!({:ssl => (request && request.ssl?), :default => "#{request.protocol}#{request.host_with_port}/plugin_assets/redmine_contacts/images/#{obj_icon}"})
-      # gravatar(obj.primary_email.downcase, options) rescue image_tag(obj_icon, options.merge({:plugin => "redmine_contacts"}))    
+      # gravatar(obj.primary_email.downcase, options) rescue image_tag(obj_icon, options.merge({:plugin => "redmine_contacts"}))
       avatar("<#{obj.primary_email}>", options)
     else
       image_tag(obj_icon, options.merge({:plugin => "redmine_contacts"}))
@@ -200,32 +225,32 @@ module ContactsHelper
     else
       contact_avatar = avatar_to(contact, :size => avatar_size)
       contact_name = contact.name
-    end  
+    end
 
-    case options.delete(:type) 
+    case options.delete(:type)
     when "avatar"
       contact_avatar.html_safe
     when "plain"
       contact_name.html_safe
     else
-      content_tag(:span, "#{contact_avatar} #{contact_name}".html_safe, :class => "contact")  
+      content_tag(:span, "#{contact_avatar} #{contact_name}".html_safe, :class => "contact")
     end
 
 
   end
-  
-  def link_to_add_phone(name)             
-    fields = '<p>' + label_tag(l(:field_contact_phone)) + 
-      text_field_tag( "contact[phones][]", '', :size => 30 ) + 
-      link_to_function(l(:label_remove), "removeField(this)") + '</p>'
+
+  def link_to_add_phone(name)
+    fields = '<p>' + label_tag(l(:field_contact_phone)) +
+      text_field_tag( "contact[phones][]", '', :size => 30 ) +
+      link_to_function(l(:label_crm_remove), "removeField(this)") + '</p>'
     link_to_function(name, h("addField(this, '#{escape_javascript(fields)}' )"))
-  end    
-  
+  end
+
   def link_to_task_complete(url, bucket)
     onclick = "this.disable();"
     onclick << %Q/$("#{dom_id(pending, :name)}").style.textDecoration="line-through";/
     onclick << remote_function(:url => url, :method => :put, :with => "{ bucket: '#{bucket}' }")
-  end   
+  end
 
   def render_contact_tabs(tabs)
     if tabs.any?
@@ -235,39 +260,37 @@ module ContactsHelper
     end
   end
 
-  def render_contact_projects_hierarchy(projects)  
+  def render_contact_projects_hierarchy(projects)
     s = ''
-    project_tree(projects) do |project, level| 
+    project_tree(projects) do |project, level|
       s << "<ul>"
       name_prefix = (level > 0 ? ('&nbsp;' * 2 * level + '&#187; ') : '')
         url = {:controller => 'contacts_projects',
                :action => 'delete',
-               :disconnect_project_id => project.id,
+               :related_project_id => project.id,
                :project_id => @project.id,
                :contact_id => @contact.id}
-      
+
       s << "<li id='project_#{project.id}'>" + name_prefix + link_to_project(project)
 
       s += ' ' + link_to(image_tag('delete.png'),
-                                 url, 
+                                 url,
                                  :remote => true,
-                                 :method => :delete, 
+                                 :method => :delete,
                                  :style => "vertical-align: middle",
                                  :class => "delete",
-                                 :title => l(:button_delete)) if (projects.size > 1 && authorize_for(:contacts, :edit) )       
-      s << "</li>"                          
+                                 :title => l(:button_delete)) if (projects.size > 1 && User.current.allowed_to?(:edit_contacts, project))
+      s << "</li>"
 
       s << "</ul>"
     end
     s.html_safe
-  end  
-  
-  def contact_to_vcard(contact)  
-    return false unless ContactsSetting.vpim?
+  end
 
-    require 'vpim/vcard'
+  def contact_to_vcard(contact)
+    return false unless ContactsSetting.vcard?
 
-    card = Vpim::Vcard::Maker.make2 do |maker|
+    card = Vcard::Vcard::Maker.make2 do |maker|
 
       maker.add_name do |name|
         name.prefix = ''
@@ -278,23 +301,28 @@ module ContactsHelper
 
       maker.add_addr do |addr|
         addr.preferred = true
-        addr.street = contact.address.to_s.gsub("\r\n"," ").gsub("\n"," ") 
+        addr.street = contact.street1.to_s.gsub("\r\n"," ").gsub("\n"," ")
+        addr.locality = contact.city.to_s
+        addr.region = contact.region.to_s
+        addr.postalcode = contact.postcode.to_s
+        addr.country = contact.country.to_s
+        addr.location = 'business'
       end
-      
+
       maker.title = contact.job_title.to_s
-      maker.org = contact.company.to_s   
+      maker.org = contact.company.to_s
       maker.birthday = contact.birthday.to_date unless contact.birthday.blank?
       maker.add_note(contact.background.to_s.gsub("\r\n"," ").gsub("\n", ' '))
-       
+
       maker.add_url(contact.website.to_s)
 
       contact.phones.each { |phone| maker.add_tel(phone) }
       contact.emails.each { |email| maker.add_email(email) }
-    end   
-    avatar = contact.attachments.find_by_description('avatar')  
+    end
+    avatar = contact.attachments.find_by_description('avatar')
     card = card.encode.sub("END:VCARD", "PHOTO;BASE64:" + "\n " + [File.open(avatar.diskfile).read].pack('m').to_s.gsub(/[ \n]/, '').scan(/.{1,76}/).join("\n ") + "\nEND:VCARD") if avatar && avatar.readable?
-    
-    card.to_s 	
+
+    card.to_s
     
   end
   def contacts_to_vcard(contacts)    
@@ -320,7 +348,7 @@ module ContactsHelper
                   l(:field_contact_website, :locale => :en),   
                   l(:field_birthday, :locale => :en),
                   l(:field_contact_tag_names, :locale => :en),
-                  l(:label_assigned_to, :locale => :en),
+                  l(:label_crm_assigned_to, :locale => :en),
                   l(:field_contact_background, :locale => :en)
                   ]
       # Export project custom fields if project is given
@@ -427,22 +455,22 @@ module ContactsHelper
   end
 
   def render_contact_tooltip(contact, options={})
-    @cached_label_company ||= l(:field_contact_company)
+    @cached_label_crm_company ||= l(:field_contact_company)
     @cached_label_job_title = contact.is_company ? l(:field_company_field) : l(:field_contact_job_title)
     @cached_label_phone ||= l(:field_contact_phone)
     @cached_label_email ||= l(:field_contact_email)
-    
+
     emails = contact.emails.any? ? contact.emails.map{|email| "<span class=\"email\" style=\"white-space: nowrap;\">#{mail_to email}</span>"}.join(', ') : ''
     phones = contact.phones.any? ? contact.phones.map{|phone| "<span class=\"phone\" style=\"white-space: nowrap;\">#{phone}</span>"}.join(', ') : ''
-    
+
     s = link_to_contact(contact, options) + "<br /><br />".html_safe
     s <<  "<strong>#{@cached_label_job_title}</strong>: #{contact.job_title}<br />".html_safe unless contact.job_title.blank?
-    s <<  "<strong>#{@cached_label_company}</strong>: #{link_to(contact.contact_company.name, {:controller => 'contacts', :action => 'show', :id => contact.contact_company.id })}<br />".html_safe if !contact.contact_company.blank? && !contact.is_company
+    s <<  "<strong>#{@cached_label_crm_company}</strong>: #{link_to(contact.contact_company.name, {:controller => 'contacts', :action => 'show', :id => contact.contact_company.id })}<br />".html_safe if !contact.contact_company.blank? && !contact.is_company
     s <<  "<strong>#{@cached_label_email}</strong>: #{emails}<br />".html_safe if contact.emails.any?
     s <<  "<strong>#{@cached_label_phone}</strong>: #{phones}<br />".html_safe if contact.phones.any?
     s
   end
-  
+
   def link_to_contact(contact, options={})
     s = ''
     html_options = {}
@@ -451,7 +479,7 @@ module ContactsHelper
  		s << link_to_source(contact, html_options)
 
  		s << "(#{contact.job_title}) " if (options[:job_title] == true) && !contact.job_title.blank?
-		s << " #{l(:label_at_company)} " if (options[:job_title] == true) && !(contact.job_title.blank? or contact.company.blank?) 
+		s << " #{l(:label_crm_at_company)} " if (options[:job_title] == true) && !(contact.job_title.blank? or contact.company.blank?)
 		if (options[:company] == true) and contact.contact_company
 			s << link_to(contact.contact_company.name, {:controller => 'contacts', :action => 'show', :id => contact.contact_company.id })
 		else
@@ -468,8 +496,19 @@ module ContactsHelper
       s << stylesheet_link_tag(:"jquery.tagit.css", :plugin => 'redmine_contacts')
       @heads_for_tagsedit_included = true
     end
-    s << javascript_tag("$('#{field_id}').tagit({availableTags: ['#{available_tags}'], allowSpaces: true, placeholderText: '#{l(:label_add_tag)}', caseSensitive: false, removeConfirmation: true});")
+    s << javascript_tag("$('#{field_id}').tagit({availableTags: ['#{available_tags}'], allowSpaces: true, placeholderText: '#{l(:label_crm_add_tag)}', caseSensitive: false, removeConfirmation: true});")
     s.html_safe
   end
-  
+
+  def set_flash_from_bulk_contact_save(contacts, unsaved_contact_ids)
+    if unsaved_contact_ids.empty?
+      flash[:notice] = l(:notice_successful_update) unless contacts.empty?
+    else
+      flash[:error] = l(:notice_failed_to_save_contacts,
+                        :count => unsaved_contact_ids.size,
+                        :total => contacts.size,
+                        :ids => '#' + unsaved_contact_ids.join(', #'))
+    end
+  end
+
 end
