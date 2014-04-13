@@ -561,4 +561,13 @@ module ContactsHelper
     end
   end
 
+  def render_contact_tabs(tabs)
+    if tabs.any?
+      render :partial => 'common/contact_tabs', :locals => {:tabs => tabs}
+    else
+      content_tag 'p', l(:label_no_data), :class => "nodata"
+    end
+  end
+
+
 end

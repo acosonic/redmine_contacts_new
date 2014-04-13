@@ -17,6 +17,33 @@
 # You should have received a copy of the GNU General Public License
 # along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
 
-if Redmine::VERSION.to_s < '2.3'
-  Dir[File.dirname(__FILE__) + '/compatibility/2.1/*.rb'].each { |f| require f }
+module RedmineContacts
+  module CSVUtils
+    include Redmine::I18n
+
+    class << self
+
+      def csv_custom_value(custom_value)
+        return "" unless custom_value
+        value = custom_value.value
+        case custom_value.custom_field.field_format
+        when 'date'
+          begin; format_date(value.to_date); rescue; value end
+        when 'bool'
+          l(value == "1" ? :general_text_Yes : :general_text_No)
+        when 'float'
+          sprintf("%.2f", value).gsub('.', l(:general_csv_decimal_separator))
+        else
+          if value.is_a?(Array)
+            value.map(&:to_s).join(', ')
+          else
+            value.to_s
+          end
+        end
+      rescue
+        return ""
+      end
+
+    end
+  end
 end
