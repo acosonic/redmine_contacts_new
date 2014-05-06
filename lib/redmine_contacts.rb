@@ -25,6 +25,7 @@ require_dependency 'redmine_contacts/contacts_project_setting'
 
 # Patches
 require_dependency 'redmine_contacts/patches/compatibility_patch'
+require_dependency 'redmine_contacts/patches/custom_fields_helper_patch'
 ActionDispatch::Reloader.to_prepare do
 	require_dependency 'redmine_contacts/patches/issue_patch'
 	require_dependency 'redmine_contacts/patches/project_patch'
