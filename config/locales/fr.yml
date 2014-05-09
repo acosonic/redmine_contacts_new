@@ -158,7 +158,7 @@ fr:
   error_empty_email: L'email ne peut être vide
   permission_send_contacts_mail: Envoyer l'email
   field_mail_from: Expéditeur
-  text_email_macros: "Macros disponibles : %{macro}"
+  text_email_macros: "Macros disponibles : %{macro}"
   field_message: Message
 
   #2.0.3
@@ -197,20 +197,19 @@ fr:
 
   #2.3.0
   label_crm_module_plural: Modules
-  label_crm_contacts_default_currency: Unité monétaire par défaut des affaires
-  label_crm_contacts_list_partial_style: Style de la liste des contacts
-  label_crm_contacts_list_excerpt: Liste d'exceptions
-  label_crm_contacts_list_cards: Cartes
-  label_crm_contacts_list_list: Table
+  label_crm_list_partial_style: Style de liste
+  label_crm_list_excerpt: Liste d'exceptions
+  label_crm_list_cards: Cartes
+  label_crm_list_list: Table
   field_contacts: Contact
   field_companies: Société
-  label_crm_contacts_added_time_by: Ajouté par
+  label_crm_added_by: Ajouté par
   label_crm_contact_note_authoring_time: Afficher l'heure de la note
   label_crm_contact_issues_filters: Filtres de demandes
-  label_crm_contacts_csv_import: Importer d'un CSV
-  label_crm_contacts_upload_encoding: Encodage du fichier
-  label_crm_contacts_csv_file: Fichier CSV
-  label_crm_contacts_csv_separator: Séparateur
+  label_crm_csv_import: Importer d'un CSV
+  label_crm_upload_encoding: Encodage du fichier
+  label_crm_csv_file: Fichier CSV
+  label_crm_csv_separator: Séparateur
   field_middle_name: Particule
   field_job_title: Métier
   field_company: Company
@@ -563,3 +562,31 @@ fr:
     ZW: Zimbabwe
     AX: Îles Åland
   label_crm_cross_project_contacts: Autoriser les relations de contacts inter-projets
+  label_crm_list_board: Tableau
+  label_crm_default_list_style: Style de liste par défaut
+  label_crm_show_in_top_menu: Afficher dans le menu principal
+  label_crm_show_in_app_menu: Afficher dans le menu des applications
+  label_crm_money_settings: Monnaie
+  label_crm_disable_taxes: Désactiver les taxes
+  label_crm_default_tax: Valeur de taxe par défaut
+  label_crm_tax_type: Type de taxe
+  label_crm_tax_type_inclusive: Taxe incluse
+  label_crm_tax_type_exclusive: Hors taxe
+  label_crm_default_currency: Monnaie par défaut
+  label_crm_thousands_delimiter: Séparateur de milliers
+  label_crm_decimal_separator: Séparateur décimal
+
+  #3.2.10
+  label_crm_add_contact_plural: Ajouter des contacts
+  label_crm_search_for_contact: Rechercher un contact
+  label_crm_major_currencies: Principales monnaies
+
+  #3.2.11
+  label_crm_post_address_format: Format d'adresse postale
+  label_crm_post_address_format_macros: "Macros de formats d'adresses : %{macros}"
+
+  #3.2.14
+  label_crm_last_year: L'année dernière
+  
+  #3.2.15
+  permission_export_contacts: Export contacts and deals

@@ -316,7 +316,6 @@ table.contacts.index tbody tr:hover { background-color:#ffffdd; }
 table.contacts.index td {
   vertical-align: top;
   color: #666;
-  font-size: 12px;
   padding: 8px 0;
   border-bottom: 1px solid #efefef;
 }

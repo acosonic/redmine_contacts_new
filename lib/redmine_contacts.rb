@@ -53,7 +53,11 @@ require_dependency 'redmine_contacts/hooks/views_layouts_hook'
 
 # Plugins
 require 'acts_as_viewable/init'
+require 'acts_as_priceable/init'
 require 'acts_as_taggable_on_patch'
+
+require 'redmine_contacts/helpers/money_helper'
+require 'redmine_contacts/helpers/contacts_helper'
 
 require 'redmine_contacts/liquid/liquid' if Object.const_defined?("Liquid") rescue false
 

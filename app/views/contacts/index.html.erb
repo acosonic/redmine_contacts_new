@@ -54,7 +54,7 @@
     <% other_formats_links do |f| %>
         <%= f.link_to 'Atom', :url => params.merge(:key => User.current.rss_key) %>
         <%= f.link_to 'CSV', :url => params %>    
-    <% end %>
+    <% end if User.current.allowed_to?(:export_contacts, @project, :global => true) %>
 <% end %>
 
 

@@ -566,3 +566,6 @@ ru:
 
   #3.2.14
   label_crm_last_year: последний год
+
+  #3.2.15
+  permission_export_contacts: Экспортировать контакты и сделки

@@ -27,11 +27,11 @@
             </td>
             <td class="name">
                 <h1><%= link_to contact.name, contact_path(contact, :project_id => @project) %></h1>
-                <h2>
+                <p>
                     <%= link_to contact.website, contact.website_address, :class => 'external', :only_path => true unless !contact.is_company %>
                     <%= mail_to contact.emails.first unless contact.is_company%>
                     <div><%= contact.phones.first %></div>
-                </h2>
+                </p>
             </td>
             <td class="info">
                 <div class="title_and_company" >

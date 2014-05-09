@@ -18,7 +18,7 @@
 # along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
 
 class CreateAddresses < ActiveRecord::Migration
-  def change
+  def up
     create_table :addresses do |t|
       t.string :street1
       t.string :street2
@@ -26,7 +26,7 @@ class CreateAddresses < ActiveRecord::Migration
       t.string :region
       t.string :postcode
       t.string :country_code, :limit => 2
-      t.string :full_address
+      t.text :full_address
       t.string :address_type, :limit => 16
 
       t.references :addressable, :polymorphic => true
@@ -36,10 +36,15 @@ class CreateAddresses < ActiveRecord::Migration
     add_index :addresses, [ :addressable_id, :addressable_type ]
 
     Contact.all.each do |asset|
-      Address.create(:street1 => asset.attributes["address"].gsub(/\n/, ' '), :full_address => asset.attributes["address"], :address_type => "business", :addressable => asset) unless asset.attributes["address"].blank?
+      Address.create(:street1 => asset.attributes["address"].gsub(/\n/, ' ').first(250), :full_address => asset.attributes["address"], :address_type => "business", :addressable => asset) unless asset.attributes["address"].blank?
     end
 
     remove_column(:contacts, :address)
+  end
+
+  def down
+    add_column :contacts, :address, :text
+    drop_table :addresses
   end
 
 end

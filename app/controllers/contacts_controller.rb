@@ -118,7 +118,6 @@ class ContactsController < ApplicationController
     end
   end
 
-
   def edit
   end
 

@@ -24,7 +24,7 @@ module RedmineContacts
     module IssueQueryPatch
       def self.included(base)
         base.send(:include, InstanceMethods)
-        base.send(:include, ContactsHelper)
+        base.send(:include, RedmineContacts::Helper)
 
         base.class_eval do
           unloadable

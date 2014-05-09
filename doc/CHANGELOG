@@ -4,6 +4,13 @@ Redmine CRM plugin - customer relationship management plugin for redmine
 Copyright (C) 2011-2014 Kirill Bezrukov
 http://www.redminecrm.com/
 
+== 2014-05-03 v3.2.16
+
+* Permission for export contacs & deals
+* French translation update by Olivier Houdas
+* Spanish tranlsation update by Leandro Russo
+* Merge contacts fixes
+
 == 2014-03-31 v3.2.15
 
 * Translation fixes for notes global search

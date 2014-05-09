@@ -151,6 +151,7 @@ module DealsHelper
   end
 
   def deals_to_csv(deals)
+    return "" unless User.current.allowed_to?(:export_contacts, @project, :global => true)
     decimal_separator = l(:general_csv_decimal_separator)
     encoding = 'utf-8'
     export = FCSV.generate(:col_sep => l(:general_csv_separator)) do |csv|

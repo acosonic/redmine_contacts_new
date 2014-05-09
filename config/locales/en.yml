@@ -587,3 +587,6 @@ en:
 
   #3.2.14
   label_crm_last_year: last year
+
+  #3.2.15
+  permission_export_contacts: Export contacts and deals

@@ -17,17 +17,17 @@
 # You should have received a copy of the GNU General Public License
 # along with redmine_contacts.  If not, see <http://www.gnu.org/licenses/>.
 
-CONTACTS_VERSION_NUMBER = '3.2.15'
-CONTACTS_VERSION_STATUS = ''
+CONTACTS_VERSION_NUMBER = '3.2.16'
+CONTACTS_VERSION_TYPE = "Light version"
 
 ActiveRecord::Base.observers += [:contact_observer, :note_observer]
 ActiveRecord::Base.observers += [:deal_observer]
 
 Redmine::Plugin.register :redmine_contacts do
-  name 'Redmine CRM plugin'
+  name "Redmine CRM plugin (#{CONTACTS_VERSION_TYPE})"
   author 'RedmineCRM'
   description 'This is a CRM plugin for Redmine that can be used to track contacts and deals information'
-  version CONTACTS_VERSION_NUMBER + '-pro' + CONTACTS_VERSION_STATUS
+  version CONTACTS_VERSION_NUMBER
   url 'http://redminecrm.com'
   author_url 'mailto:support@redminecrm.com'
 

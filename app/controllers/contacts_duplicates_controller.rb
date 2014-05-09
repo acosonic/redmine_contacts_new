@@ -47,19 +47,25 @@ class ContactsDuplicatesController < ApplicationController
   def merge
     @duplicate.notes << @contact.notes
     @duplicate.deals << @contact.deals
+    @duplicate.related_deals << @contact.related_deals
     @duplicate.issues << @contact.issues
     @duplicate.projects << @contact.projects
     @duplicate.email = (@duplicate.emails | @contact.emails).join(', ')
     @duplicate.phone = (@duplicate.phones | @contact.phones).join(', ')
 
     call_hook(:controller_contacts_duplicates_merge, {:params => params, :duplicate => @duplicate, :contact => @contact})
-
     @duplicate.tag_list = @duplicate.tag_list | @contact.tag_list
-    if @duplicate.save && @contact.destroy
-      flash[:notice] = l(:notice_successful_merged)
-      redirect_to :controller => "contacts", :action => "show", :project_id => @project, :id => @duplicate
-    else
-      render "index"
+    begin
+      Contact.transaction do
+        @duplicate.save!
+        @duplicate.reload
+        @contact.reload
+        @contact.destroy
+        flash[:notice] = l(:notice_successful_merged)
+        redirect_to :controller => "contacts", :action => "show", :project_id => @project, :id => @duplicate
+      end
+    rescue
+      redirect_to :action => "duplicates", :contact_id => @contact, :project_id => @project
     end
 
   end

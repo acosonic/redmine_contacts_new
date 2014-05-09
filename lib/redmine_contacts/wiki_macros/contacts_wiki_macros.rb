@@ -79,13 +79,7 @@ module RedmineContacts
         args, options = extract_macro_options(args, :parent)
         raise 'No or bad arguments.' if args.size != 1
         deal = Deal.visible.find(args.first)
-        s = ''
-        s << avatar_to(deal, :size => "16") + " "
-        s << link_to(deal.full_name, polymorphic_url(deal)) + " "
-        s << content_tag('span',
-                         deal.status,
-                         :style => "background-color:#{deal.status.color_name};color:white;padding: 3px 4px;font-size: 10px;white-space: nowrap;margin-right: 4px;", :class => "tag-label-color") if deal.status
-        s.html_safe
+        deal_tag(deal)
       end
 
 
