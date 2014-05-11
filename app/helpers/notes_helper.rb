@@ -23,7 +23,7 @@ module NotesHelper
   include ContactsHelper
 
   def collection_for_note_types_select
-    note_types = [[l(:label_crm_note), '']] + [:label_crm_note_type_email, :label_crm_note_type_call, :label_crm_note_type_meeting].each_with_index.collect{|type, i| [l(type), i]}
+    note_types = [[l(:label_crm_note), '']] + [:label_crm_note_type_email, :label_crm_note_type_call, :label_crm_note_type_meeting, :label_crm_note_type_info].each_with_index.collect{|type, i| [l(type), i]}
     context = {:note_types => note_types}
     call_hook(:helper_notes_note_type_label, context)
     context[:note_types]
@@ -38,6 +38,8 @@ module NotesHelper
       note_type_tag = content_tag('span', '', :class => "icon icon-call", :title => l(:label_crm_note_type_call))
     when 2
       note_type_tag = content_tag('span', '', :class => "icon icon-meeting", :title => l(:label_crm_note_type_meeting))
+    when 3
+      note_type_tag = content_tag('span', '', :class => "icon icon-info", :title => l(:label_crm_note_type_info))
     end
     context = {:type_tag => note_type_tag, :type_id => note.type_id}
     call_hook(:helper_notes_note_type_tag, context)

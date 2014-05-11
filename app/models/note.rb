@@ -40,7 +40,7 @@ class Note < ActiveRecord::Base
   after_create :send_notification
 
   cattr_accessor :note_types
-  @@note_types = {:email => 0, :call => 1, :meeting => 2}
+  @@note_types = {:email => 0, :call => 1, :meeting => 2, :info => 3}
   cattr_accessor :cut_length
   @@cut_length = 1000
 

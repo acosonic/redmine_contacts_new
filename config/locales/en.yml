@@ -180,6 +180,7 @@ en:
   label_crm_note_type_email: Email
   label_crm_note_type_call: Call
   label_crm_note_type_meeting: Meeting
+  label_crm_note_type_info: Info
   field_deal_currency: Currency
   label_crm_my_contacts_stats: Contacts statistics for this month
   label_crm_contacts_created: Contacts created

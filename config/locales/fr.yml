@@ -180,6 +180,7 @@ fr:
   label_crm_note_type_email: Email
   label_crm_note_type_call: Appeler
   label_crm_note_type_meeting: Réunion
+  label_crm_note_type_info: Info
   field_deal_currency: Unité monétaire
   label_crm_my_contacts_stats: Statistiques des contacts pour ce mois
   label_crm_contacts_created: Contacts créés

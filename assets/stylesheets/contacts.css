@@ -469,6 +469,7 @@ table.list.deal-board tbody tr:hover {background-color: white;}
 .icon-link-break { background-image: url(../../../images/link_break.png); }
 .icon-call { background-image: url(../images/phone.png); }
 .icon-meeting { background-image: url(../images/calendar_view_day.png); }
+.icon-info { background-image: url(../images/rosette.png); }
 .icon-vcard { background-image: url(../images/vcard.png); }
 .icon-phone { background-image: url(../images/telephone.png); }
 .icon-email { background-image: url(../images/email.png); }
